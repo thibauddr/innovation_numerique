@@ -23,4 +23,5 @@
   - Other: ![#73C6D9](https://via.placeholder.com/15/73C6D9/73C6D9.png) `#73C6D9`
 
 ### Fonts
-  - 
+  - Titre : Patrick Hand
+  - Texte : Montserrat
