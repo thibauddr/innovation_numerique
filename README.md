@@ -3,13 +3,13 @@
 ## Choix des technologies
 
 ### Front
-  - [Angular]([Angular](https://angular.io/docs))
-  - [https://www.primefaces.org/primeng/setup](PrimeNG)
-  - [https://fontawesome.com/start](Font_Awesome)
+  - Angular -> Angular](https://angular.io/docs
+  - PrimeNG -> https://www.primefaces.org/primeng/setup
+  - Font Awesome -> https://fontawesome.com/start
 
 ### Back
-  - [https://maven.apache.org/](Maven)
+  - Maven -> https://maven.apache.org/
 
 ### Génération du projet
-  - [https://www.jhipster.tech/](JHipster)
+  - JHipster -> https://www.jhipster.tech/
 
