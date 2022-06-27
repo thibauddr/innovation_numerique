@@ -3,7 +3,7 @@
 ## Choix des technologies
 
 ### Front
-  - [https://angular.io/docs](Angular)
+  - [Angular]([Angular](https://angular.io/docs))
   - [https://www.primefaces.org/primeng/setup](PrimeNG)
   - [https://fontawesome.com/start](Font_Awesome)
 
