@@ -5,7 +5,7 @@
 ### Front
   - [https://angular.io/docs](Angular)
   - [https://www.primefaces.org/primeng/setup](PrimeNG)
-  - [https://fontawesome.com/start](Font Awesome)
+  - [https://fontawesome.com/start](Font_Awesome)
 
 ### Back
   - [https://maven.apache.org/](Maven)
