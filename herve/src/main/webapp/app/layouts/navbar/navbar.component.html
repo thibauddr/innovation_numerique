@@ -2,8 +2,7 @@
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
-      <span jhiTranslate="global.title" class="navbar-title">Herve</span>
-      <span class="navbar-version">{{ version }}</span>
+      <span class="navbar-title">Hervé</span>
     </a>
     <a
       class="navbar-toggler d-lg-none"
@@ -19,6 +18,7 @@
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
       <ul class="navbar-nav ms-auto">
+        <!-- #region Home -->
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
             <span>
@@ -27,9 +27,30 @@
             </span>
           </a>
         </li>
-        <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+        <!-- #endregion -->
+        <!-- #region Field -->
+        <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+            <span>
+              <i class="fa-solid fa-seedling"></i>
+              <span jhiTranslate="global.menu.entities.field">Field</span>
+            </span>
+          </a>
+        </li>
+        <!-- #endregion -->
+        <!-- #region Sensor -->
+        <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+            <span>
+              <i class="fa-solid fa-satellite-dish"></i>
+              <span jhiTranslate="global.menu.entities.sensor">Sensor</span>
+            </span>
+          </a>
+        </li>
+        <!-- #endregion -->
+        <!-- #region Entities list -->
         <li
-          *ngSwitchCase="true"
+          *jhiHasAnyAuthority="'ROLE_ADMIN'"
           ngbDropdown
           class="nav-item dropdown pointer"
           display="dynamic"
@@ -42,10 +63,10 @@
               <span jhiTranslate="global.menu.entities.main">Entities</span>
             </span>
           </a>
-          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-            <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-          </ul>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu"></ul>
         </li>
+        <!-- #endregion -->
+        <!-- #region Administration -->
         <li
           *jhiHasAnyAuthority="'ROLE_ADMIN'"
           ngbDropdown
@@ -97,9 +118,9 @@
                 <span jhiTranslate="global.menu.admin.apidocs">API</span>
               </a>
             </li>
-            <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
           </ul>
         </li>
+        <!-- #endregion -->
         <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
           <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
             <span>

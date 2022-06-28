@@ -2,6 +2,8 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Patrick+Hand+SC&display=swap';
+
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -14,14 +16,21 @@ h4 {
   font-weight: 300;
 }
 
+h1 {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 100px !important;
+  color: $orange;
+}
+
 /* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
 a {
-  color: #533f03;
+  color: $darkGreen;
   font-weight: bold;
+  text-decoration: none;
 }
 
 a:hover {
-  color: #533f03;
+  color: $darkGreen;
 }
 
 /* override hover color for dropdown-item forced by bootstrap to all a:not([href]):not([tabindex]) elements in _reboot.scss */
