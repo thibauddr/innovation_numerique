@@ -969,10 +969,10 @@
                                 <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                                 <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                                 <driver>com.mysql.cj.jdbc.Driver</driver>
-                                <url>jdbc:mysql://localhost:3306/herve</url>
-                                <defaultSchemaName>herve</defaultSchemaName>
+                                <url>jdbc:mysql://localhost:8889/herve_db</url>
+                                <defaultSchemaName>herve_db</defaultSchemaName>
                                 <username>root</username>
-                                <password></password>
+                                <password>root</password>
                                 <referenceUrl>hibernate:spring:com.herve.app.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                                 <verbose>true</verbose>
                                 <logging>debug</logging>

@@ -65,6 +65,8 @@ local.properties
 *.orig
 classes/
 out/
+*application-dev.yml
+*pom.xml
 
 ######################
 # Visual Studio Code
