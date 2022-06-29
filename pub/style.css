@@ -44,21 +44,28 @@ body {
 
 .content .right .description .btn {
   display: block;
+  width: 30%;
+  padding: 17px 60px;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
   align-items: center;
   text-align: center;
-  color: #FFFFFF;
-  border: none;
-  cursor: pointer;
   text-transform: uppercase;
+  text-decoration: none;
+
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 20px;
+
+  cursor: pointer;
   outline: none;
   overflow: hidden;
   position: relative;
-  color: #fff;
-  background-color: #222;
-  padding: 17px 60px;
-  margin-top: 10%;
   box-shadow: 0 5px 15px rgba(0,0,0,0.20);
 }
 
@@ -73,18 +80,25 @@ body {
   left: 0;
   top: 0;
   height: 490%;
-  width: 140%;
+  width: 100%;
   background: #4D7353;
   -webkit-transition: all .5s ease-in-out;
   transition: all .5s ease-in-out;
-  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
-  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  -webkit-transform: translateX(-90%) translateY(-25%) rotate(45deg);
+  transform: translateX(-150%) translateY(-25%) rotate(45deg);
 }
 
 .content .right .description .btn:hover:after {
   -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
   transform: translateX(-9%) translateY(-25%) rotate(45deg);
 }
+
+.footer {
+  text-align: center;
+  font-size: 0.8em;
+  padding: 50px;
+}
+
 
 @media screen and (min-width: 800px) {
   .header {
