@@ -1,3 +1,4 @@
+@import './../../../content/scss/bootstrap-variables';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 
@@ -7,7 +8,6 @@ Navbar
 
 .navbar-version {
   font-size: 0.65em;
-  color: $navbar-dark-color;
 }
 
 .profile-image {
@@ -17,6 +17,11 @@ Navbar
 
 .navbar {
   padding: 0.2rem 1rem;
+  background-color: $lightGreen !important;
+  border-radius: 20px;
+  width: 90vw;
+  margin: auto;
+  margin-top: 15px;
 
   a.nav-link {
     font-weight: 400;
@@ -31,6 +36,6 @@ Logo styles
   width: 45px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/herve.png') no-repeat center center;
   background-size: contain;
 }
