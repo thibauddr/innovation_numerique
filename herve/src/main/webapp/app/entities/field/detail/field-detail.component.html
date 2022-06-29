@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="field">
+      <h2 data-cy="fieldDetailsHeading"><span jhiTranslate="herveApp.field.detail.title">Field</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ field.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.field.name">Name</span></dt>
+        <dd>
+          <span>{{ field.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.field.description">Description</span></dt>
+        <dd>
+          <span>{{ field.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.field.position">Position</span></dt>
+        <dd>
+          <span>{{ field.position }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.field.user">User</span></dt>
+        <dd>
+          <span>{{ field.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/field', field.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -30,7 +30,7 @@
         <!-- #endregion -->
         <!-- #region Field -->
         <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+          <a class="nav-link" routerLink="/field" (click)="collapseNavbar()">
             <span>
               <i class="fa-solid fa-seedling"></i>
               <span jhiTranslate="global.menu.entities.field">Field</span>
@@ -40,7 +40,7 @@
         <!-- #endregion -->
         <!-- #region Sensor -->
         <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+          <a class="nav-link" routerLink="/sensor" (click)="collapseNavbar()">
             <span>
               <i class="fa-solid fa-satellite-dish"></i>
               <span jhiTranslate="global.menu.entities.sensor">Sensor</span>

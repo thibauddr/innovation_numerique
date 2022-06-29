@@ -50,6 +50,12 @@ public class CacheConfiguration {
             createCache(cm, com.herve.app.domain.User.class.getName() + ".authorities");
             createCache(cm, com.herve.app.domain.PersistentToken.class.getName());
             createCache(cm, com.herve.app.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, com.herve.app.domain.Field.class.getName());
+            createCache(cm, com.herve.app.domain.Sensor.class.getName());
+            createCache(cm, com.herve.app.domain.Field.class.getName() + ".sensors");
+            createCache(cm, com.herve.app.domain.SensorType.class.getName());
+            createCache(cm, com.herve.app.domain.SensorData.class.getName());
+            createCache(cm, com.herve.app.domain.Sensor.class.getName() + ".sensorData");
             // jhipster-needle-ehcache-add-entry
         };
     }

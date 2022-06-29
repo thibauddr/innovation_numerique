@@ -1,0 +1,114 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-sensor-heading" data-cy="SensorCreateUpdateHeading" jhiTranslate="herveApp.sensor.home.createOrEditLabel">
+        Create or edit a Sensor
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="herveApp.sensor.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="herveApp.sensor.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="herveApp.sensor.position_x" for="field_position_x">Position X</label>
+          <input
+            type="number"
+            class="form-control"
+            name="position_x"
+            id="field_position_x"
+            data-cy="position_x"
+            formControlName="position_x"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="herveApp.sensor.position_y" for="field_position_y">Position Y</label>
+          <input
+            type="number"
+            class="form-control"
+            name="position_y"
+            id="field_position_y"
+            data-cy="position_y"
+            formControlName="position_y"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="herveApp.sensor.field" for="field_field">Field</label>
+          <select class="form-control" id="field_field" data-cy="field" name="field" formControlName="field">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="fieldOption.id === editForm.get('field')!.value?.id ? editForm.get('field')!.value : fieldOption"
+              *ngFor="let fieldOption of fieldsSharedCollection; trackBy: trackFieldById"
+            >
+              {{ fieldOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="herveApp.sensor.sensorType" for="field_sensorType">Sensor Type</label>
+          <select class="form-control" id="field_sensorType" data-cy="sensorType" name="sensorType" formControlName="sensorType">
+            <option *ngIf="!editForm.get('sensorType')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                sensorTypeOption.id === editForm.get('sensorType')!.value?.id ? editForm.get('sensorType')!.value : sensorTypeOption
+              "
+              *ngFor="let sensorTypeOption of sensorTypesSharedCollection; trackBy: trackSensorTypeById"
+            >
+              {{ sensorTypeOption.id }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['sensorType'])!.invalid && (editForm.get(['sensorType'])!.dirty || editForm.get(['sensorType'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['sensorType'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

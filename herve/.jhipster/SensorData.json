@@ -1,0 +1,33 @@
+{
+  "changelogDate": "20220629154559",
+  "dto": "no",
+  "fields": [
+    {
+      "fieldName": "unit",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "datetime",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "SensorData",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "sensor",
+      "relationshipName": "sensor",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

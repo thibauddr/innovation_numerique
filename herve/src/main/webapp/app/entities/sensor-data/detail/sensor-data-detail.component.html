@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sensorData">
+      <h2 data-cy="sensorDataDetailsHeading"><span jhiTranslate="herveApp.sensorData.detail.title">Sensor Data</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ sensorData.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensorData.unit">Unit</span></dt>
+        <dd>
+          <span>{{ sensorData.unit }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensorData.value">Value</span></dt>
+        <dd>
+          <span>{{ sensorData.value }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensorData.datetime">Datetime</span></dt>
+        <dd>
+          <span>{{ sensorData.datetime | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensorData.sensor">Sensor</span></dt>
+        <dd>
+          <div *ngIf="sensorData.sensor">
+            <a [routerLink]="['/sensor', sensorData.sensor?.id, 'view']">{{ sensorData.sensor?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sensor-data', sensorData.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

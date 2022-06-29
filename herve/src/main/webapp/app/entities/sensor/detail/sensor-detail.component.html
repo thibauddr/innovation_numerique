@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sensor">
+      <h2 data-cy="sensorDetailsHeading"><span jhiTranslate="herveApp.sensor.detail.title">Sensor</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ sensor.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensor.name">Name</span></dt>
+        <dd>
+          <span>{{ sensor.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensor.description">Description</span></dt>
+        <dd>
+          <span>{{ sensor.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensor.position_x">Position X</span></dt>
+        <dd>
+          <span>{{ sensor.position_x }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensor.position_y">Position Y</span></dt>
+        <dd>
+          <span>{{ sensor.position_y }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensor.field">Field</span></dt>
+        <dd>
+          <div *ngIf="sensor.field">
+            <a [routerLink]="['/field', sensor.field?.id, 'view']">{{ sensor.field?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensor.sensorType">Sensor Type</span></dt>
+        <dd>
+          <div *ngIf="sensor.sensorType">
+            <a [routerLink]="['/sensor-type', sensor.sensorType?.id, 'view']">{{ sensor.sensorType?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sensor', sensor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
