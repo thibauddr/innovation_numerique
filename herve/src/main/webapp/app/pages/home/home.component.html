@@ -1,11 +1,24 @@
 <div class="row">
+  <h1 class="display-4"><span jhiTranslate="home.title">Hervé</span></h1>
+
+  <p-carousel [value]="fields" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+    <ng-template let-field pTemplate="item">
+      <div class="field-item">
+        <div class="field-item-content">
+          <div>
+            <h4 class="p-mb-1">{{ field.name }}</h4>
+            <p>{{ field.description }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+
   <div class="col-md-3">
     <span class="herve img-fluid rounded"></span>
   </div>
 
   <div class="col-md-9">
-    <h1 class="display-4"><span jhiTranslate="home.title">Hervé</span></h1>
-
     <div [ngSwitch]="account !== null">
       <div class="alert alert-success" *ngSwitchCase="true">
         <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }"

@@ -9,10 +9,8 @@
         "main": "Entités",
         "field": "Champ",
         "sensor": "Capteur",
-        "field": "Field",
-        "sensor": "Sensor",
-        "sensorType": "Sensor Type",
-        "sensorData": "Sensor Data",
+        "sensorType": "Capteur type",
+        "sensorData": "Capteur data",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
