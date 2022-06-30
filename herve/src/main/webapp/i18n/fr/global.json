@@ -9,6 +9,10 @@
         "main": "Entités",
         "field": "Champ",
         "sensor": "Capteur",
+        "field": "Field",
+        "sensor": "Sensor",
+        "sensorType": "Sensor Type",
+        "sensorData": "Sensor Data",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -139,5 +143,5 @@
       "not.image": "Le fichier doit être une image et non du type \"{{ fileType }}\""
     }
   },
-  "footer":  "Projet d'innovation numérique"
+  "footer": "Projet d'innovation numérique"
 }

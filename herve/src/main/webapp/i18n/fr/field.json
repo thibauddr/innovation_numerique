@@ -1,0 +1,28 @@
+{
+  "herveApp": {
+    "field": {
+      "home": {
+        "title": "Fields",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Field",
+        "createOrEditLabel": "Créer ou éditer un Field",
+        "notFound": "Aucun Field trouvé"
+      },
+      "created": "Un nouveau Field a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Field avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Field avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Field {{ id }} ?"
+      },
+      "detail": {
+        "title": "Field"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "position": "Position",
+      "user": "User",
+      "sensor": "Sensor"
+    }
+  }
+}

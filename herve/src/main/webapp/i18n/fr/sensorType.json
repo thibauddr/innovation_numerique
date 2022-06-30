@@ -1,0 +1,26 @@
+{
+  "herveApp": {
+    "sensorType": {
+      "home": {
+        "title": "SensorTypes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Sensor Type",
+        "createOrEditLabel": "Créer ou éditer un Sensor Type",
+        "notFound": "Aucun Sensor Type trouvé"
+      },
+      "created": "Un nouveau Sensor Type a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Sensor Type avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Sensor Type avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Sensor Type {{ id }} ?"
+      },
+      "detail": {
+        "title": "Sensor Type"
+      },
+      "id": "ID",
+      "code": "Code",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

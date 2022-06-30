@@ -1,0 +1,30 @@
+{
+  "herveApp": {
+    "sensor": {
+      "home": {
+        "title": "Sensors",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Sensor",
+        "createOrEditLabel": "Créer ou éditer un Sensor",
+        "notFound": "Aucun Sensor trouvé"
+      },
+      "created": "Un nouveau Sensor a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Sensor avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Sensor avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Sensor {{ id }} ?"
+      },
+      "detail": {
+        "title": "Sensor"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "position_x": "Position X",
+      "position_y": "Position Y",
+      "field": "Field",
+      "sensorType": "Sensor Type",
+      "sensorData": "Sensor Data"
+    }
+  }
+}
