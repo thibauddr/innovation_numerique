@@ -1,11 +1,5 @@
 id;code;name;description
-1;tan;face Sleek;driver Awesome
-2;neural Pays;Fresh;Borders needs-based Unbranded
-3;Hat Grocery;system Wooden;Pays-Bas
-4;silver Avon c;Shoes;Granite parse
-5;engineer impactful c;Cotton Cap-Vert Metal;frictionless de middleware
-6;Gorgeous;withdrawal;Bedfordshire Awesome Oberkampf
-7;Computers;cross-platform superstructure;unleash
-8;Sum Cambridgeshire;transitional drive lime;Agent
-9;Vatu Card;generate;Sports
-10;Handmade;calculate invoice Diverse;c
+1;1;Temperature;Capteur permettant de relever la temperature et l'humidite dans l'air
+2;2;Luminosite;Capteur permettant de relever la luminosite
+3;3;Humidite des sols;Capteur permettant de relever l'humidite des sols
+4;4;Pluie / Soleil;Capteur permettant de relever si il pleut ou non

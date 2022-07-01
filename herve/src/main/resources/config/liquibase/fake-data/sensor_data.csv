@@ -1,11 +1,13 @@
 id;unit;value;datetime
-1;auxiliary;16398;2022-06-28
-2;c deposit;33672;2022-06-28
-3;overriding Chair;76648;2022-06-29
-4;generating extensible collaboration;37303;2022-06-29
-5;user-centric;12898;2022-06-28
-6;zero;55224;2022-06-29
-7;firewall Sausages administration;38684;2022-06-29
-8;Frozen Saint-Denis;14103;2022-06-29
-9;deposit RSS;57290;2022-06-29
-10;Nigeria;78332;2022-06-28
+1;°C;25;2022-06-28
+2;watt / lux;850;2022-06-28
+3;non humide;40;2022-06-28
+4;soleil;800;2022-06-28
+5;°C;12;2022-06-28
+6;watt / lux;250;2022-06-28
+7;humide;85;2022-06-28
+8;pluie;300;2022-06-28
+9;°C;37;2022-06-29
+10;watt / lux;150;2022-06-29
+11;non humide;15;2022-06-29
+12;soleil;900;2022-06-29
