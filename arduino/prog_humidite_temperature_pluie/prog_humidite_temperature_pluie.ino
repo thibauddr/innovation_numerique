@@ -1,4 +1,3 @@
-
 #include "DHT.h"
 
 int rainPin = A0;
