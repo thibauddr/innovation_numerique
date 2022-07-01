@@ -3,14 +3,7 @@
     <!-- #region User is connected -->
     <div *ngSwitchCase="true">
       <!-- #region Carousel -->
-      <p-carousel
-        [value]="fields"
-        styleClass="custom-carousel"
-        [numVisible]="3"
-        [numScroll]="1"
-        [circular]="true"
-        [autoplayInterval]="3000"
-      >
+      <p-carousel [value]="fields" styleClass="custom-carousel" [numVisible]="3" [numScroll]="3" [circular]="false">
         <ng-template let-field pTemplate="item">
           <div class="field-item">
             <div class="field-item-content">
@@ -25,13 +18,11 @@
       <!-- #endregion -->
       <div class="row">
         <div class="col-md-6">
-          <h3><span>Alerte du</span>  {{ date | date: 'MM/dd/yy' }}</h3>
+          <h3><span>Alerte(s) du</span> {{ date | date: 'MM/dd/yy' }}</h3>
           <p-messages [(value)]="msgs"></p-messages>
         </div>
         <div class="col-md-6">
-          <h3>
-            <span>Moyenne du</span> {{ date | date: 'MM/dd/yy' }}
-          </h3>
+          <h3><span>Moyennes du</span> {{ date | date: 'MM/dd/yy' }}</h3>
           <div class="row">
             <!-- #region Temperature -->
             <div class="col-md-6">

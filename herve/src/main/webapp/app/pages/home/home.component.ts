@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private setFields(): void {
     this.fieldService
-      .query()
+      .getWithCurrentUser()
       .pipe(
         map((res: HttpResponse<IField[]>) => {
           this.fields = res.body ?? [];
