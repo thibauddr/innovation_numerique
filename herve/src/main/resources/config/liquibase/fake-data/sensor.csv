@@ -1,11 +1,13 @@
 id;name;description;position_x;position_y;sensor_type_id
-1;c Granite Seine;global;42716;76914;1
-2;multi-byte Bretagne Soft;l'Odéon Rustic;46789;31923;2
-3;program Computer;b;59945;75130;3
-4;Faso Loan circuit;connect Lats;10214;64297;4
-5;Slovaquie index;d’Ivoire matrix Distributed;7128;59050;5
-6;Ergonomic Sports;Rustic digital Generic;58718;19783;6
-7;Chilean navigate;Tasty;45848;5352;7
-8;Nakfa;ivory Analyste lavender;81020;65311;8
-9;SQL cutting-edge haptic;Midi-Pyrénées;77552;6385;9
-10;deposit Cambridgeshire;alarm deliverables indexing;79629;31922;10
+1;Capteur de temperature;Situe au NE;1000;1000;1
+2;Capteur de  luminosite;Situe au NO;0;1000;2
+3;Capteur de  d'humidite des sols;Situe au NO;0;1000;3
+4;Capteur de  pluie / soleil;Situe au NE;1000;1000;4
+5;Capteur de  d'humidite des sols;Situe au SO;0;0;3
+6;Capteur de  luminosite;Situe au SO;0;0;2
+7;Capteur de temperature;Situe au SE;1000;0;1
+8;Capteur de  luminosite;Situe au milieu du champ;500;500;2
+9;Capteur de  d'humidite des sols;Situe au milieu du champ;500;500;3
+10;Capteur de  pluie / soleil;Situe au SE;1000;0;4
+11;Capteur de temperature;Situe au milieu du champ;500;500;1
+12;Capteur de  pluie / soleil;Situe au milieu du champ;500;500;4
