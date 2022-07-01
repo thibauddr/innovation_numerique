@@ -1,40 +1,95 @@
 <div class="row">
-  <h1 class="display-4"><span jhiTranslate="home.title">Hervé</span></h1>
-
-  <p-carousel [value]="fields" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
-    <ng-template let-field pTemplate="item">
-      <div class="field-item">
-        <div class="field-item-content">
-          <div>
-            <h4 class="p-mb-1">{{ field.name }}</h4>
-            <p>{{ field.description }}</p>
+  <div [ngSwitch]="account !== null" class="mt-2">
+    <!-- #region User is connected -->
+    <div *ngSwitchCase="true">
+      <!-- #region Carousel -->
+      <p-carousel
+        [value]="fields"
+        styleClass="custom-carousel"
+        [numVisible]="3"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="3000"
+      >
+        <ng-template let-field pTemplate="item">
+          <div class="field-item">
+            <div class="field-item-content">
+              <div>
+                <h4 class="p-mb-1">{{ field.name }}</h4>
+                <p>{{ field.description }}</p>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+      <!-- #endregion -->
+      <div class="row">
+        <div class="col-md-6">
+          <h3><span>Alerte du</span>  {{ date | date: 'MM/dd/yy' }}</h3>
+          <p-messages [(value)]="msgs"></p-messages>
+        </div>
+        <div class="col-md-6">
+          <h3>
+            <span>Moyenne du</span> {{ date | date: 'MM/dd/yy' }}
+          </h3>
+          <div class="row">
+            <!-- #region Temperature -->
+            <div class="col-md-6">
+              <h5><span jhiTranslate="herveApp.sensor.temperature">Temperature</span>:</h5>
+              <div class="thermometer">
+                <p-timeline [value]="TEMPERATURE_SCALE" align="alternate">
+                  <ng-template pTemplate="marker" let-event>
+                    <span class="custom-marker shadow-2">
+                      <i [ngClass]="event.icon"></i>
+                    </span>
+                  </ng-template>
+                  <ng-template pTemplate="content" let-event> &#123;&#123;event.status&#125;&#125; </ng-template>
+                </p-timeline>
+              </div>
+            </div>
+            <!-- #endregion -->
+            <!-- #region Humidity -->
+            <div class="col-md-6">
+              <h5><span jhiTranslate="herveApp.sensor.humidity">Humidity</span>:</h5>
+              <div class="thermometer">
+                <p-timeline [value]="HUMIDITY_SCALE" align="alternate">
+                  <ng-template pTemplate="marker" let-event>
+                    <span class="custom-marker shadow-2">
+                      <i [ngClass]="event.icon"></i>
+                    </span>
+                  </ng-template>
+                  <ng-template pTemplate="content" let-event> &#123;&#123;event.status&#125;&#125; </ng-template>
+                </p-timeline>
+              </div>
+            </div>
+            <!-- #endregion -->
           </div>
         </div>
       </div>
-    </ng-template>
-  </p-carousel>
-
-  <div class="col-md-3">
-    <span class="herve img-fluid rounded"></span>
-  </div>
-
-  <div class="col-md-9">
-    <div [ngSwitch]="account !== null">
-      <div class="alert alert-success" *ngSwitchCase="true">
-        <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }"
-          >You are logged in as user "{{ account.login }}".</span
-        >
+    </div>
+    <!-- #endregion -->
+    <!-- #region User is'nt connected -->
+    <div *ngSwitchCase="false">
+      <div>
+        <h1 class="display-4"><span jhiTranslate="home.title">Hervé</span></h1>
       </div>
+      <div class="row">
+        <div class="col-md-3">
+          <span class="herve img-fluid rounded"></span>
+        </div>
+        <div class="col-md-9">
+          <div class="alert alert-warning">
+            <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
+            <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a>
+          </div>
 
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
-        <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a>
-      </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
-        <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+          <div class="alert alert-warning">
+            <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
+            <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+          </div>
+        </div>
       </div>
     </div>
+    <!-- #endregion -->
   </div>
 </div>

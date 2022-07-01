@@ -155,6 +155,19 @@ public class SensorDataResource {
     }
 
     /**
+     * {@code GET  /sensor-data} : get sensorData where datetime = now.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of sensorData in body.
+     */
+    @GetMapping("/sensor-data/now")
+    public ResponseEntity<List<SensorData>> getNowSensorData(SensorDataCriteria criteria) {
+        log.debug("REST request to get SensorData by criteria: {}", criteria);
+        List<SensorData> entityList = sensorDataQueryService.findNow(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
      * {@code GET  /sensor-data/count} : count all the sensorData.
      *
      * @param criteria the criteria which the requested entities should match.

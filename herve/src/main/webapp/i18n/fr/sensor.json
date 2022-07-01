@@ -24,7 +24,9 @@
       "position_y": "Position Y",
       "field": "Field",
       "sensorType": "Sensor Type",
-      "sensorData": "Sensor Data"
+      "sensorData": "Sensor Data",
+      "temperature": "Température",
+      "humidity": "Humidité"
     }
   }
 }

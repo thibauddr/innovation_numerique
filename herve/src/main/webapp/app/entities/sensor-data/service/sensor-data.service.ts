@@ -46,6 +46,12 @@ export class SensorDataService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findNow(): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<ISensorData[]>(`${this.resourceUrl}/now`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
