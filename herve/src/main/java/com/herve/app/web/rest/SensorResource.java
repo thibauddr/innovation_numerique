@@ -156,7 +156,7 @@ public class SensorResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of sensors in body.
      */
     @GetMapping("/sensors/getWithFieldId/{fieldId}")
-    public ResponseEntity<List<Sensor>> getSensorsWithFieldId(Long fieldId) {
+    public ResponseEntity<List<Sensor>> getSensorsWithFieldId(@PathVariable Long fieldId) {
         log.debug("REST request to get Sensors by field id: {fieldId}", fieldId);
         List<Sensor> entityList = sensorQueryService.findByFieldId(fieldId);
         return ResponseEntity.ok().body(entityList);

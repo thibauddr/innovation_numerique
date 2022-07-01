@@ -9,9 +9,9 @@ import { IField } from 'app/entities/field/field.model';
 import { HttpResponse } from '@angular/common/http';
 import { TEMPERATURE_SCALE } from 'app/entities/sensor/data/temperatureScale';
 import { HUMIDITY_SCALE } from 'app/entities/sensor/data/humidityScale';
-import { SensorDataService } from 'app/entities/sensor-data/service/sensor-data.service';
-import { ISensorData } from 'app/entities/sensor-data/sensor-data.model';
 import { Message } from 'primeng/api';
+import { SensorService } from 'app/entities/sensor/service/sensor.service';
+import { ISensor } from 'app/entities/sensor/sensor.model';
 
 @Component({
   selector: 'jhi-home',
@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   account: Account | null = null;
   fields: IField[] = [];
-  sensorData: ISensorData[] = [];
+  selectedField: IField | null = null;
+  sensors: ISensor[] = [];
   msgs: Message[] = [];
 
   TEMPERATURE_SCALE = TEMPERATURE_SCALE;
@@ -37,7 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private router: Router,
     private fieldService: FieldService,
-    private sensorDataService: SensorDataService
+    private sensorService: SensorService
   ) {}
 
   ngOnInit(): void {
@@ -46,8 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => (this.account = account));
 
-    this.setFields();
-    this.setDataSensor();
+    this.setData();
   }
 
   login(): void {
@@ -59,23 +59,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  private setFields(): void {
+  private setData(): void {
     this.fieldService
       .getWithCurrentUser()
       .pipe(
         map((res: HttpResponse<IField[]>) => {
           this.fields = res.body ?? [];
+          this.selectedField = this.fields[0];
         })
       )
-      .subscribe();
+      .subscribe(() => {
+        this.setSensor();
+      });
   }
 
-  private setDataSensor(): void {
-    this.sensorDataService
-      .findNow()
+  private setSensor(): void {
+    this.sensorService
+      .getWithFieldId(this.fields[0].id ? this.fields[0].id : -1)
       .pipe(
         map((res: HttpResponse<IField[]>) => {
-          this.sensorData = res.body ?? [];
+          this.sensors = res.body ?? [];
         })
       )
       .subscribe();
