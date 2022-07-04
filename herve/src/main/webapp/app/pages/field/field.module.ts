@@ -9,7 +9,6 @@ import { TableModule } from 'primeng/table';
 import { ChipModule } from 'primeng/chip';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
-
 @NgModule({
   imports: [SharedModule, FieldRoutingModule, ButtonModule, TableModule, ChipModule, ChartModule],
   declarations: [FieldComponent, FieldDetailComponent, FieldUpdateComponent, FieldDeleteDialogComponent],
