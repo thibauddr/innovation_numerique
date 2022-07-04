@@ -16,6 +16,6 @@ import java.util.Optional;
 @Repository
 public interface SensorRepository extends JpaRepository<Sensor, Long>, JpaSpecificationExecutor<Sensor> {
 
-    @Query("select sensor from Sensor sensor left join fetch sensor.sensorData left join fetch sensor.sensorType where sensor.field.id = :id")
+    @Query("select distinct sensor from Sensor sensor left join fetch sensor.sensorData left join fetch sensor.sensorType where sensor.field.id = :id")
     List<Sensor> findByFieldId(@Param("id") Long id);
 }
