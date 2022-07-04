@@ -1,44 +1,85 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <div *ngIf="field">
-      <h2 data-cy="fieldDetailsHeading"><span jhiTranslate="herveApp.field.detail.title">Field</span></h2>
+<div class="justify-content-center">
+  <div *ngIf="field">
+    <div class="mb-5">
+      <button pButton icon="fa-solid fa-circle-arrow-left" type="button" iconPos="left" label="Retour" (click)="previousState()"></button>
 
-      <hr />
+      <button
+        pButton
+        icon="fa-solid fa-pencil"
+        type="button"
+        iconPos="left"
+        label="Edit"
+        [routerLink]="['/field', field.id, 'edit']"
+      ></button>
+    </div>
 
-      <jhi-alert-error></jhi-alert-error>
+    <h2 data-cy="fieldDetailsHeading">{{ field.name }}</h2>
 
-      <jhi-alert></jhi-alert>
+    <hr />
+    <jhi-alert-error></jhi-alert-error>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ field.id }}</span>
-        </dd>
-        <dt><span jhiTranslate="herveApp.field.name">Name</span></dt>
-        <dd>
-          <span>{{ field.name }}</span>
-        </dd>
-        <dt><span jhiTranslate="herveApp.field.description">Description</span></dt>
-        <dd>
-          <span>{{ field.description }}</span>
-        </dd>
-        <dt><span jhiTranslate="herveApp.field.position">Position</span></dt>
-        <dd>
-          <span>{{ field.position }}</span>
-        </dd>
-        <dt><span jhiTranslate="herveApp.field.user">User</span></dt>
-        <dd>
-          <span>{{ field.user?.login }}</span>
-        </dd>
-      </dl>
+    <div class="row">
+      <div class="col-md-5">
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="herveApp.field.description">Description</span></dt>
+          <dd>
+            <span>{{ field.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="herveApp.field.position">Position</span></dt>
+          <dd>
+            <span>{{ field.position }}</span>
+          </dd>
+        </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
-
-      <button type="button" [routerLink]="['/field', field.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
+        <p-chart type="line" [data]="lineData" [options]=""></p-chart>
+      </div>
+      <div class="col-md-7">
+        <!-- #region Table -->
+        <p-table [value]="sensors" [scrollable]="true" scrollHeight="400px" [resizableColumns]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pResizableColumn pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>Name</th>
+              <th pResizableColumn>Description</th>
+              <th pResizableColumn pSortableColumn="sensorType.code"><p-sortIcon field="code"></p-sortIcon>Type</th>
+              <th pResizableColumn></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-sensor>
+            <tr>
+              <td>{{ sensor.name }}</td>
+              <td>{{ sensor.description }}</td>
+              <td>
+                <p-chip
+                  label="{{ sensor.sensorType.name }}"
+                  [icon]="
+                    sensor.sensorType.code == 'TEM'
+                      ? 'fa-solid fa-temperature-half'
+                      : sensor.sensorType.code == 'LUM'
+                      ? 'fa-solid fa-lightbulb'
+                      : sensor.sensorType.code == 'HUM'
+                      ? 'fa-solid fa-droplet'
+                      : sensor.sensorType.code == 'RAI'
+                      ? 'fa-solid fa-cloud-showers-heavy'
+                      : ''
+                  "
+                  styleClass="{{ sensor.sensorType.code }}"
+                ></p-chip>
+              </td>
+              <td>
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="fa-solid fa-eye"
+                  class="p-button-rounded p-button-outlined"
+                  (click)="viewSensorPage(sensor.id)"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <!-- #endregion -->
+      </div>
     </div>
   </div>
 </div>

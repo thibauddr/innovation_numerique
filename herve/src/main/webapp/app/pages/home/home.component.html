@@ -7,9 +7,21 @@
         <ng-template let-field pTemplate="item">
           <div class="field-item">
             <div class="field-item-content">
-              <div>
-                <h4 class="p-mb-1">{{ field.name }}</h4>
-                <p>{{ field.description }}</p>
+              <div class="row">
+                <div class="col-md-10">
+                  <h4 class="p-mb-1">{{ field.name }}</h4>
+                  <p>{{ field.description }}</p>
+                </div>
+                <div class="col-md-2">
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="fa-solid fa-eye"
+                    class="p-button-rounded p-button-outlined"
+                    (click)="viewFieldPage(field.id)"
+                  ></button>
+                </div>
               </div>
             </div>
           </div>
@@ -17,45 +29,22 @@
       </p-carousel>
       <!-- #endregion -->
       <div class="row">
-        <div class="col-md-6">
-          <h3><span>Alerte(s) du</span> {{ date | date: 'MM/dd/yy' }}</h3>
-          <p-messages [(value)]="msgs"></p-messages>
-        </div>
-        <div class="col-md-6">
-          <h3><span>Moyennes du</span> {{ date | date: 'MM/dd/yy' }}</h3>
-          <div class="row">
-            <!-- #region Temperature -->
-            <div class="col-md-6">
-              <h5><span jhiTranslate="herveApp.sensor.temperature">Temperature</span>:</h5>
-              <div class="thermometer">
-                <p-timeline [value]="TEMPERATURE_SCALE" align="alternate">
-                  <ng-template pTemplate="marker" let-event>
-                    <span class="custom-marker shadow-2">
-                      <i [ngClass]="event.icon"></i>
-                    </span>
-                  </ng-template>
-                  <ng-template pTemplate="content" let-event> &#123;&#123;event.status&#125;&#125; </ng-template>
-                </p-timeline>
-              </div>
-            </div>
-            <!-- #endregion -->
-            <!-- #region Humidity -->
-            <div class="col-md-6">
-              <h5><span jhiTranslate="herveApp.sensor.humidity">Humidity</span>:</h5>
-              <div class="thermometer">
-                <p-timeline [value]="HUMIDITY_SCALE" align="alternate">
-                  <ng-template pTemplate="marker" let-event>
-                    <span class="custom-marker shadow-2">
-                      <i [ngClass]="event.icon"></i>
-                    </span>
-                  </ng-template>
-                  <ng-template pTemplate="content" let-event> &#123;&#123;event.status&#125;&#125; </ng-template>
-                </p-timeline>
-              </div>
-            </div>
-            <!-- #endregion -->
+        <div class="col-md-7"></div>
+        <div class="col-md-3"></div>
+        <!-- #region Temperature -->
+        <div class="col-md-2">
+          <div class="thermometer">
+            <p-timeline [value]="TEMPERATURE_SCALE" align="alternate">
+              <ng-template pTemplate="marker" let-event>
+                <span class="custom-marker shadow-2">
+                  <i [ngClass]="event.icon"></i>
+                </span>
+              </ng-template>
+              <ng-template pTemplate="content" let-event> &#123;&#123;event.status&#125;&#125; </ng-template>
+            </p-timeline>
           </div>
         </div>
+        <!-- #endregion -->
       </div>
     </div>
     <!-- #endregion -->
