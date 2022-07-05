@@ -20,7 +20,8 @@
       "id": "ID",
       "code": "Code",
       "name": "Name",
-      "description": "Description"
+      "description": "Description",
+      "temperature": "Température"
     }
   }
 }

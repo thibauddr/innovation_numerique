@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISensor } from 'app/entities/sensor/sensor.model';
 import { SensorService } from 'app/entities/sensor/service/sensor.service';
+import { Dayjs } from 'dayjs';
 import { map } from 'rxjs';
 import { IField } from '../../../entities/field/field.model';
 
@@ -15,16 +16,15 @@ import { IField } from '../../../entities/field/field.model';
 export class FieldDetailComponent implements OnInit {
   field: IField | null = null;
   sensors: ISensor[] = [];
-  lineData: any = {};
   now: Date = new Date();
 
   formatDate = 'dd/MM/yyyy';
   regionDate = 'fr-FR';
 
-  temperatureData: any[] = [];
-  LuminosityData: any[] = [];
-  HumidityData: any[] = [];
-  RaimData: any[] = [];
+  temperatureData: any = {};
+  LuminosityData: any = {};
+  HumidityData: any = {};
+  RaimData: any = {};
 
   $temperatureColor = '#F27A5E';
   $luminosityColor = '#F2E34D';
@@ -61,45 +61,61 @@ export class FieldDetailComponent implements OnInit {
       });
   }
 
+  private setLabelsLine(): any[] {
+    return [
+      formatDate(new Date().setDate(this.now.getDate() - 4), this.formatDate, this.regionDate),
+      formatDate(new Date().setDate(this.now.getDate() - 3), this.formatDate, this.regionDate),
+      formatDate(new Date().setDate(this.now.getDate() - 2), this.formatDate, this.regionDate),
+      formatDate(new Date().setDate(this.now.getDate() - 1), this.formatDate, this.regionDate),
+      formatDate(this.now, this.formatDate, this.regionDate),
+    ];
+  }
+
   private setLineData(): void {
+    let sensorsLength = 0;
+    let min = 0;
+    let max = 0;
+    const values: number[] = [];
+    const minDate = formatDate(new Date().setDate(this.now.getDate() - 4), this.formatDate, this.regionDate);
+    this.sensors.forEach(sensor => {
+      const typeCode = sensor ? (sensor.sensorType ? sensor.sensorType.code : -1) : -1;
+      if (typeCode === 'TEM') {
+        sensorsLength++;
+        min += sensor.minThreshold ?? 0;
+        max += sensor.threshold ?? 0;
+        sensor.sensorData?.forEach(data => {
+          if (data ? data.datetime : new Dayjs() <= new Dayjs(minDate)) {
+            values.push(data.value ? data.value : 0);
+          }
+        });
+      }
+    });
+    min = min / sensorsLength;
+    max = max / sensorsLength;
 
-
-    this.lineData = {
-      labels: [
-        formatDate(new Date().setDate(this.now.getDate() - 4), this.formatDate, this.regionDate),
-        formatDate(new Date().setDate(this.now.getDate() - 3), this.formatDate, this.regionDate),
-        formatDate(new Date().setDate(this.now.getDate() - 2), this.formatDate, this.regionDate),
-        formatDate(new Date().setDate(this.now.getDate() - 1), this.formatDate, this.regionDate),
-        formatDate(this.now, this.formatDate, this.regionDate),
-      ],
+    this.temperatureData = {
+      labels: this.setLabelsLine(),
       datasets: [
         {
           label: 'Température',
-          data: [65, 59, 80, 81, 56, 55, 40],
+          data: [values[0], values[1], values[2], values[3], values[4]],
           fill: false,
           tension: 0.4,
           borderColor: this.$temperatureColor,
         },
         {
-          label: 'Luminosité',
-          data: [28, 48, 40, 19, 86, 27, 90],
+          label: 'Seuil min',
+          data: [min, min, min, min, min],
           fill: false,
           tension: 0.4,
           borderColor: this.$luminosityColor,
         },
         {
-          label: 'Humidité',
-          data: [28, 48, 40, 19, 86, 27, 90],
+          label: 'Seuil max',
+          data: [max, max, max, max, max],
           fill: false,
           tension: 0.4,
           borderColor: this.$humidityColor,
-        },
-        {
-          label: 'Pluie',
-          data: [28, 48, 40, 19, 86, 27, 90],
-          fill: false,
-          tension: 0.4,
-          borderColor: this.$raimColor,
         },
       ],
     };
