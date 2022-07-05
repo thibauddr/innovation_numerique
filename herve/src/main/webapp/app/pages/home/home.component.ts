@@ -24,6 +24,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   fields: IField[] = [];
   msgs: Message[] = [];
+  sensorDataToday: SensorData[] | null = null;
+
+  temperatureValue: number | null = null;
+  luminosityValue: number | null = null;
+  humidityValue: number | null = null;
+  raimValue: number | null = null;
 
   alertToday: any[] = [];
   alertYesterday: any[] = [];
@@ -80,14 +86,29 @@ export class HomeComponent implements OnInit, OnDestroy {
       .getSensorDataCurrentUserAlert()
       .pipe(
         map((res: HttpResponse<ISensorData[]>) => {
-          const alerts = res.body ?? [];
-          alerts.forEach(alert => {
+          this.sensorDataToday = res.body ?? [];
+          this.sensorDataToday.forEach(alert => {
             const value = alert.value ? alert.value : -1;
             const minThreshold = alert ? (alert.sensor ? (alert.sensor.minThreshold ? alert.sensor.minThreshold : -1) : -1) : -1;
             const maxThreshold = alert ? (alert.sensor ? (alert.sensor.threshold ? alert.sensor.threshold : -1) : -1) : -1;
 
             if (value < minThreshold || value > maxThreshold) {
               this.alertToday.push(alert);
+            }
+
+            switch (alert.unit) {
+              case '°C':
+                this.temperatureValue = value;
+                break;
+              case 'lux':
+                this.luminosityValue = value;
+                break;
+              case '%':
+                this.humidityValue = value;
+                break;
+              case 'mm':
+                this.raimValue = value;
+                break;
             }
           });
         })

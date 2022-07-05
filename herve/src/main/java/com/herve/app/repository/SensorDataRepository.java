@@ -16,6 +16,6 @@ import java.util.List;
 public interface SensorDataRepository extends JpaRepository<SensorData, Long>, JpaSpecificationExecutor<SensorData> {
     List<SensorData> findByDatetimeEquals(LocalDate date);
 
-    @Query("select distinct sensorData from SensorData sensorData left join fetch sensorData.sensor as sensor join fetch sensor.field as field join fetch sensor.sensorType where field.user.login = ?#{principal.username} and sensorData.datetime = :date")
+    @Query("select distinct sensorData from SensorData sensorData left join fetch sensorData.sensor as sensor join fetch sensor.field as field left join fetch sensor.sensorType where field.user.login = ?#{principal.username} and sensorData.datetime = :date")
     List<SensorData> findCurrentUserAlert(@Param("date") LocalDate date);
 }

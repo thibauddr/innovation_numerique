@@ -22,9 +22,9 @@ export class FieldDetailComponent implements OnInit {
   regionDate = 'fr-FR';
 
   temperatureData: any = {};
-  LuminosityData: any = {};
-  HumidityData: any = {};
-  RaimData: any = {};
+  luminosityData: any = {};
+  humidityData: any = {};
+  raimData: any = {};
 
   $temperatureColor = '#F27A5E';
   $luminosityColor = '#F2E34D';
@@ -57,7 +57,10 @@ export class FieldDetailComponent implements OnInit {
         })
       )
       .subscribe(() => {
-        this.setLineData();
+        this.setLineTemperature();
+        this.setLineLight();
+        this.setLineHumidity();
+        this.setLineRaim();
       });
   }
 
@@ -71,7 +74,7 @@ export class FieldDetailComponent implements OnInit {
     ];
   }
 
-  private setLineData(): void {
+  private setLineTemperature(): void {
     let sensorsLength = 0;
     let min = 0;
     let max = 0;
@@ -108,14 +111,164 @@ export class FieldDetailComponent implements OnInit {
           data: [min, min, min, min, min],
           fill: false,
           tension: 0.4,
-          borderColor: this.$luminosityColor,
+          borderColor: '#000',
         },
         {
           label: 'Seuil max',
           data: [max, max, max, max, max],
           fill: false,
           tension: 0.4,
+          borderColor: '#000',
+        },
+      ],
+    };
+  }
+
+  private setLineLight(): void {
+    let sensorsLength = 0;
+    let min = 0;
+    let max = 0;
+    const values: number[] = [];
+    const minDate = formatDate(new Date().setDate(this.now.getDate() - 4), this.formatDate, this.regionDate);
+    this.sensors.forEach(sensor => {
+      const typeCode = sensor ? (sensor.sensorType ? sensor.sensorType.code : -1) : -1;
+      if (typeCode === 'LUM') {
+        sensorsLength++;
+        min += sensor.minThreshold ?? 0;
+        max += sensor.threshold ?? 0;
+        sensor.sensorData?.forEach(data => {
+          if (data ? data.datetime : new Dayjs() <= new Dayjs(minDate)) {
+            values.push(data.value ? data.value : 0);
+          }
+        });
+      }
+    });
+    min = min / sensorsLength;
+    max = max / sensorsLength;
+
+    this.luminosityData = {
+      labels: this.setLabelsLine(),
+      datasets: [
+        {
+          label: 'Luminosity',
+          data: [values[0], values[1], values[2], values[3], values[4]],
+          fill: false,
+          tension: 0.4,
+          borderColor: this.$luminosityColor,
+        },
+        {
+          label: 'Seuil min',
+          data: [min, min, min, min, min],
+          fill: false,
+          tension: 0.4,
+          borderColor: '#000',
+        },
+        {
+          label: 'Seuil max',
+          data: [max, max, max, max, max],
+          fill: false,
+          tension: 0.4,
+          borderColor: '#000',
+        },
+      ],
+    };
+  }
+
+  private setLineHumidity(): void {
+    let sensorsLength = 0;
+    let min = 0;
+    let max = 0;
+    const values: number[] = [];
+    const minDate = formatDate(new Date().setDate(this.now.getDate() - 4), this.formatDate, this.regionDate);
+    this.sensors.forEach(sensor => {
+      const typeCode = sensor ? (sensor.sensorType ? sensor.sensorType.code : -1) : -1;
+      if (typeCode === 'HUM') {
+        sensorsLength++;
+        min += sensor.minThreshold ?? 0;
+        max += sensor.threshold ?? 0;
+        sensor.sensorData?.forEach(data => {
+          if (data ? data.datetime : new Dayjs() <= new Dayjs(minDate)) {
+            values.push(data.value ? data.value : 0);
+          }
+        });
+      }
+    });
+    min = min / sensorsLength;
+    max = max / sensorsLength;
+
+    this.humidityData = {
+      labels: this.setLabelsLine(),
+      datasets: [
+        {
+          label: 'Humidité',
+          data: [values[0], values[1], values[2], values[3], values[4]],
+          fill: false,
+          tension: 0.4,
           borderColor: this.$humidityColor,
+        },
+        {
+          label: 'Seuil min',
+          data: [min, min, min, min, min],
+          fill: false,
+          tension: 0.4,
+          borderColor: '#000',
+        },
+        {
+          label: 'Seuil max',
+          data: [max, max, max, max, max],
+          fill: false,
+          tension: 0.4,
+          borderColor: '#000',
+        },
+      ],
+    };
+  }
+
+  private setLineRaim(): void {
+    let sensorsLength = 0;
+    let min = 0;
+    let max = 0;
+    const values: number[] = [];
+    const minDate = formatDate(new Date().setDate(this.now.getDate() - 4), this.formatDate, this.regionDate);
+    this.sensors.forEach(sensor => {
+      const typeCode = sensor ? (sensor.sensorType ? sensor.sensorType.code : -1) : -1;
+      if (typeCode === 'RAI') {
+        sensorsLength++;
+        min += sensor.minThreshold ?? 0;
+        max += sensor.threshold ?? 0;
+        sensor.sensorData?.forEach(data => {
+          if (data ? data.datetime : new Dayjs() <= new Dayjs(minDate)) {
+            values.push(data.value ? data.value : 0);
+          }
+        });
+      }
+    });
+    min = min / sensorsLength;
+    max = max / sensorsLength;
+
+    this.raimData = {
+      labels: this.setLabelsLine(),
+      datasets: [
+        {
+          label: 'Précipitations',
+          data: [values[0], values[1], values[2], values[3], values[4]],
+          fill: false,
+          tension: 0.4,
+          borderColor: this.$raimColor,
+        },
+        {
+          label: 'Seuil min',
+          data: [min, min, min, min, min],
+          fill: false,
+          tension: 0.4,
+          borderColor: '#000',
+        },
+        {
+          label: 'Seuil max',
+          data: [max, max, max, max, max],
+          fill: false,
+          tension: 0.4,
+          borderColor: '#000',
         },
       ],
     };

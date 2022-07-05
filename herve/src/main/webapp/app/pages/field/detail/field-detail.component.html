@@ -17,26 +17,26 @@
 
     <hr />
     <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+      <dt><span jhiTranslate="herveApp.field.description">Description</span></dt>
+      <dd>
+        <span>{{ field.description }}</span>
+      </dd>
+      <dt><span jhiTranslate="herveApp.field.position">Position</span></dt>
+      <dd>
+        <span>{{ field.position }}</span>
+      </dd>
+    </dl>
 
-    <div class="row">
+    <div class="row mt-5 mb-5">
       <div class="col-md-5">
-        <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="herveApp.field.description">Description</span></dt>
-          <dd>
-            <span>{{ field.description }}</span>
-          </dd>
-          <dt><span jhiTranslate="herveApp.field.position">Position</span></dt>
-          <dd>
-            <span>{{ field.position }}</span>
-          </dd>
-        </dl>
-
         <h3 jhiTranslate="herveApp.sensorType.temperature">Temperature</h3>
         <p-chart type="line" [data]="temperatureData" [options]=""></p-chart>
       </div>
       <div class="col-md-7">
+        <h3 jhiTranslate="herveApp.sensor.list">Sensors list</h3>
         <!-- #region Table -->
-        <p-table [value]="sensors" [scrollable]="true" scrollHeight="400px" [resizableColumns]="true">
+        <p-table [value]="sensors" [scrollable]="true" scrollHeight="420px" [resizableColumns]="true">
           <ng-template pTemplate="header">
             <tr>
               <th pResizableColumn pSortableColumn="name" scope="col"><p-sortIcon field="name"></p-sortIcon>Name</th>
@@ -54,7 +54,7 @@
                   label="{{ sensor.sensorType.name }}"
                   [icon]="
                     sensor.sensorType.code == 'TEM'
-                      ? 'fa-solid fa-temperature-half'
+                      ? 'fa-solid fa-temperature-high'
                       : sensor.sensorType.code == 'LUM'
                       ? 'fa-solid fa-lightbulb'
                       : sensor.sensorType.code == 'HUM'
@@ -80,6 +80,21 @@
           </ng-template>
         </p-table>
         <!-- #endregion -->
+      </div>
+    </div>
+
+    <div class="row mt-5 mb-5">
+      <div class="col-md-4">
+        <h3 jhiTranslate="herveApp.sensorType.luminosity">Luminosity</h3>
+        <p-chart type="line" [data]="luminosityData" [options]=""></p-chart>
+      </div>
+      <div class="col-md-4">
+        <h3 jhiTranslate="herveApp.sensorType.humidity">Humidity</h3>
+        <p-chart type="line" [data]="humidityData" [options]=""></p-chart>
+      </div>
+      <div class="col-md-4">
+        <h3 jhiTranslate="herveApp.sensorType.raim">Raim</h3>
+        <p-chart type="line" [data]="raimData" [options]=""></p-chart>
       </div>
     </div>
   </div>

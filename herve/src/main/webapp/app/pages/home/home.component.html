@@ -8,7 +8,15 @@
           <div class="field-item">
             <div class="field-item-content">
               <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-2">
+                  <p><i class="fa-solid fa-temperature-high"></i> {{ temperatureValue }}°</p>
+                  <p><i class="fa-solid fa-lightbulb"></i> {{ luminosityValue }} lux</p>
+                </div>
+                <div class="col-md-2">
+                  <p><i class="fa-solid fa-droplet"></i> {{ humidityValue }} %</p>
+                  <p><i class="fa-solid fa-cloud-showers-heavy"></i> {{ raimValue }} mm</p>
+                </div>
+                <div class="col-md-6">
                   <h4 class="p-mb-1">{{ field.name }}</h4>
                   <p>{{ field.description }}</p>
                 </div>
@@ -43,9 +51,9 @@
             <ng-template pTemplate="body" let-data>
               <tr>
                 <td>{{ data.sensor.name }}</td>
-                <td>{{ data.sensor.minThreshold }}</td>
-                <td>{{ data.sensor.threshold }}</td>
-                <td>{{ data.value }}</td>
+                <td>{{ data.sensor.minThreshold }}  {{ data.unit }}</td>
+                <td>{{ data.sensor.threshold }}  {{ data.unit }}</td>
+                <td>{{ data.value }} {{ data.unit }}</td>
               </tr>
             </ng-template>
           </p-table>
@@ -54,7 +62,7 @@
           <h4 jhiTranslate="global.menu.today">Today</h4>
           <p-messages severity="error" *ngFor="let data of alertToday">
             <ng-template pTemplate>
-              <div class="ml-2">{{ data.sensor.name + ' - ' + data.sensor.field + ' - ' + data.value + ' '  + data.unit }}</div>
+              <div class="ml-2">{{ data.sensor.name + ' - ' + data.sensor.field + ' - ' + data.value + ' ' + data.unit }}</div>
             </ng-template>
           </p-messages>
         </div>

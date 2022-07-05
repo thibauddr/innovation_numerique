@@ -17,6 +17,7 @@
       "detail": {
         "title": "Capteur"
       },
+      "list": "Liste des capteurs",
       "id": "ID",
       "name": "Name",
       "description": "Description",

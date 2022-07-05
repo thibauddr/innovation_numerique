@@ -21,7 +21,10 @@
       "code": "Code",
       "name": "Name",
       "description": "Description",
-      "temperature": "Température"
+      "temperature": "Température",
+      "luminosity": "Luminosité",
+      "humidity": "Humidité",
+      "raim": "Précipitations"
     }
   }
 }
