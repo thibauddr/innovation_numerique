@@ -29,20 +29,45 @@
       </p-carousel>
       <!-- #endregion -->
       <div class="row">
-        <div class="col-md-7"></div>
-        <div class="col-md-3"></div>
+        <div class="col-md-5">
+          <h4 jhiTranslate="global.menu.yesterday">Yesterday</h4>
+          <p-table [value]="alertYesterday">
+            <ng-template pTemplate="header">
+              <tr>
+                <th scope="col"><span jhiTranslate="herveApp.sensor.detail.title">Sensor</span></th>
+                <th scope="col"><span jhiTranslate="herveApp.sensor.minThreshold">Min threshold</span></th>
+                <th scope="col"><span jhiTranslate="herveApp.sensor.threshold">Threshold</span></th>
+                <th scope="col"><span jhiTranslate="herveApp.sensor.sensorData">Value</span></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-data>
+              <tr>
+                <td>{{ data.sensor.name }}</td>
+                <td>{{ data.sensor.minThreshold }}</td>
+                <td>{{ data.sensor.threshold }}</td>
+                <td>{{ data.value }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div class="col-md-5">
+          <h4 jhiTranslate="global.menu.today">Today</h4>
+          <p-messages severity="error" *ngFor="let data of alertToday">
+            <ng-template pTemplate>
+              <div class="ml-2">{{ data.sensor.name + ' - ' + data.sensor.field + ' - ' + data.value + ' '  + data.unit }}</div>
+            </ng-template>
+          </p-messages>
+        </div>
         <!-- #region Temperature -->
-        <div class="col-md-2">
-          <div class="thermometer">
-            <p-timeline [value]="TEMPERATURE_SCALE" align="alternate">
-              <ng-template pTemplate="marker" let-event>
-                <span class="custom-marker shadow-2">
-                  <i [ngClass]="event.icon"></i>
-                </span>
-              </ng-template>
-              <ng-template pTemplate="content" let-event> &#123;&#123;event.status&#125;&#125; </ng-template>
-            </p-timeline>
-          </div>
+        <div class="col-md-2 thermometer">
+          <p-timeline [value]="TEMPERATURE_SCALE" align="alternate">
+            <ng-template pTemplate="marker" let-event>
+              <span class="custom-marker shadow-2">
+                <i [ngClass]="event.icon"></i>
+              </span>
+            </ng-template>
+            <ng-template pTemplate="content" let-event> &#123;&#123;event.status&#125;&#125; </ng-template>
+          </p-timeline>
         </div>
         <!-- #endregion -->
       </div>

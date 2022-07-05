@@ -2,29 +2,31 @@
   "herveApp": {
     "sensor": {
       "home": {
-        "title": "Sensors",
+        "title": "Capteurs",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Sensor",
-        "createOrEditLabel": "Créer ou éditer un Sensor",
-        "notFound": "Aucun Sensor trouvé"
+        "createLabel": "Créer un nouveau Capteur",
+        "createOrEditLabel": "Créer ou éditer un Capteur",
+        "notFound": "Aucun Capteur trouvé"
       },
-      "created": "Un nouveau Sensor a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Sensor avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Sensor avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Capteur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Capteur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Capteur avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Sensor {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Capteur {{ id }} ?"
       },
       "detail": {
-        "title": "Sensor"
+        "title": "Capteur"
       },
       "id": "ID",
       "name": "Name",
       "description": "Description",
       "position_x": "Position X",
       "position_y": "Position Y",
+      "threshold": "Seuil max",
+      "minThreshold": "Seuil min",
       "field": "Field",
-      "sensorType": "Sensor Type",
-      "sensorData": "Sensor Data",
+      "sensorType": "Capteur Type",
+      "sensorData": "Valeur",
       "temperature": "Température",
       "humidity": "Humidité"
     }

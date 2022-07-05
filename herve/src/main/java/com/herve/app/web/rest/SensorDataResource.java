@@ -8,6 +8,8 @@ import com.herve.app.service.criteria.SensorDataCriteria;
 import com.herve.app.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -164,6 +166,36 @@ public class SensorDataResource {
     public ResponseEntity<List<SensorData>> getNowSensorData(SensorDataCriteria criteria) {
         log.debug("REST request to get SensorData by criteria: {}", criteria);
         List<SensorData> entityList = sensorDataQueryService.findNow(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+     * {@code GET  /sensor-data} : get sensorData where user is connected
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of sensorData in body.
+     */
+    @GetMapping("/sensor-data/getSensorDataCurrentUserAlert")
+    public ResponseEntity<List<SensorData>> getSensorDataCurrentUserAlert(SensorDataCriteria criteria) {
+        log.debug("REST request to get getSensorDataCurrentUserAlert by criteria: {}", criteria);
+        List<SensorData> entityList = sensorDataQueryService.findCurrentUserAlert(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+     * {@code GET  /sensor-data} : get sensorData where user is connected
+     *
+     * @param dateString the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of sensorData in body.
+     */
+    @GetMapping("/sensor-data/getSensorDataCurrentUserByDay/{dateString}")
+    public ResponseEntity<List<SensorData>> getSensorDataCurrentUserByDay(@PathVariable String dateString) {
+        log.debug("REST request to get getSensorDataCurrentUserAlert by date: {}", dateString);
+        var year = Integer.parseInt(dateString.split("-")[0]);
+        var month = Integer.parseInt(dateString.split("-")[1]);
+        var day = Integer.parseInt(dateString.split("-")[2]);
+        var date = LocalDate.of(year, month, day);
+        List<SensorData> entityList = sensorDataQueryService.findCurrentUserWithDay(date);
         return ResponseEntity.ok().body(entityList);
     }
 

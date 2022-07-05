@@ -10,6 +10,8 @@ import { HttpResponse } from '@angular/common/http';
 import { TEMPERATURE_SCALE } from 'app/entities/sensor/data/temperatureScale';
 import { HUMIDITY_SCALE } from 'app/entities/sensor/data/humidityScale';
 import { Message } from 'primeng/api';
+import { SensorDataService } from 'app/entities/sensor-data/service/sensor-data.service';
+import { ISensorData, SensorData } from 'app/entities/sensor-data/sensor-data.model';
 
 @Component({
   selector: 'jhi-home',
@@ -23,12 +25,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   fields: IField[] = [];
   msgs: Message[] = [];
 
+  alertToday: any[] = [];
+  alertYesterday: any[] = [];
+
   TEMPERATURE_SCALE = TEMPERATURE_SCALE;
   HUMIDITY_SCALE = HUMIDITY_SCALE;
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private accountService: AccountService, private router: Router, private fieldService: FieldService) {}
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private fieldService: FieldService,
+    private sensorDataService: SensorDataService
+  ) {}
 
   ngOnInit(): void {
     this.accountService
@@ -58,6 +68,38 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(
         map((res: HttpResponse<IField[]>) => {
           this.fields = res.body ?? [];
+        })
+      )
+      .subscribe(() => {
+        this.setSensors();
+      });
+  }
+
+  private setSensors(): void {
+    this.sensorDataService
+      .getSensorDataCurrentUserAlert()
+      .pipe(
+        map((res: HttpResponse<ISensorData[]>) => {
+          const alerts = res.body ?? [];
+          alerts.forEach(alert => {
+            const value = alert.value ? alert.value : -1;
+            const minThreshold = alert ? (alert.sensor ? (alert.sensor.minThreshold ? alert.sensor.minThreshold : -1) : -1) : -1;
+            const maxThreshold = alert ? (alert.sensor ? (alert.sensor.threshold ? alert.sensor.threshold : -1) : -1) : -1;
+
+            if (value < minThreshold || value > maxThreshold) {
+              this.alertToday.push(alert);
+            }
+          });
+        })
+      )
+      .subscribe();
+
+    const date = new Date();
+    this.sensorDataService
+      .getSensorDataCurrentUserAlertWithDate(new Date(date.setDate(date.getDate() - 1)))
+      .pipe(
+        map((res: HttpResponse<ISensorData[]>) => {
+          this.alertYesterday = res.body ?? [];
         })
       )
       .subscribe();

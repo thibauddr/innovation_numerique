@@ -48,6 +48,14 @@ class SensorResourceIT {
     private static final Integer UPDATED_POSITION_Y = 2;
     private static final Integer SMALLER_POSITION_Y = 1 - 1;
 
+    private static final Float DEFAULT_THRESHOLD = 1F;
+    private static final Float UPDATED_THRESHOLD = 2F;
+    private static final Float SMALLER_THRESHOLD = 1F - 1F;
+
+    private static final Float DEFAULT_MIN_THRESHOLD = 1F;
+    private static final Float UPDATED_MIN_THRESHOLD = 2F;
+    private static final Float SMALLER_MIN_THRESHOLD = 1F - 1F;
+
     private static final String ENTITY_API_URL = "/api/sensors";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -76,7 +84,9 @@ class SensorResourceIT {
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
             .position_x(DEFAULT_POSITION_X)
-            .position_y(DEFAULT_POSITION_Y);
+            .position_y(DEFAULT_POSITION_Y)
+            .threshold(DEFAULT_THRESHOLD)
+            .minThreshold(DEFAULT_MIN_THRESHOLD);
         // Add required entity
         SensorType sensorType;
         if (TestUtil.findAll(em, SensorType.class).isEmpty()) {
@@ -101,7 +111,9 @@ class SensorResourceIT {
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
             .position_x(UPDATED_POSITION_X)
-            .position_y(UPDATED_POSITION_Y);
+            .position_y(UPDATED_POSITION_Y)
+            .threshold(UPDATED_THRESHOLD)
+            .minThreshold(UPDATED_MIN_THRESHOLD);
         // Add required entity
         SensorType sensorType;
         if (TestUtil.findAll(em, SensorType.class).isEmpty()) {
@@ -139,6 +151,8 @@ class SensorResourceIT {
         assertThat(testSensor.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testSensor.getPosition_x()).isEqualTo(DEFAULT_POSITION_X);
         assertThat(testSensor.getPosition_y()).isEqualTo(DEFAULT_POSITION_Y);
+        assertThat(testSensor.getThreshold()).isEqualTo(DEFAULT_THRESHOLD);
+        assertThat(testSensor.getMinThreshold()).isEqualTo(DEFAULT_MIN_THRESHOLD);
     }
 
     @Test
@@ -176,7 +190,9 @@ class SensorResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].position_x").value(hasItem(DEFAULT_POSITION_X)))
-            .andExpect(jsonPath("$.[*].position_y").value(hasItem(DEFAULT_POSITION_Y)));
+            .andExpect(jsonPath("$.[*].position_y").value(hasItem(DEFAULT_POSITION_Y)))
+            .andExpect(jsonPath("$.[*].threshold").value(hasItem(DEFAULT_THRESHOLD.doubleValue())))
+            .andExpect(jsonPath("$.[*].minThreshold").value(hasItem(DEFAULT_MIN_THRESHOLD.doubleValue())));
     }
 
     @Test
@@ -194,7 +210,9 @@ class SensorResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.position_x").value(DEFAULT_POSITION_X))
-            .andExpect(jsonPath("$.position_y").value(DEFAULT_POSITION_Y));
+            .andExpect(jsonPath("$.position_y").value(DEFAULT_POSITION_Y))
+            .andExpect(jsonPath("$.threshold").value(DEFAULT_THRESHOLD.doubleValue()))
+            .andExpect(jsonPath("$.minThreshold").value(DEFAULT_MIN_THRESHOLD.doubleValue()));
     }
 
     @Test
@@ -581,6 +599,214 @@ class SensorResourceIT {
 
     @Test
     @Transactional
+    void getAllSensorsByThresholdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where threshold equals to DEFAULT_THRESHOLD
+        defaultSensorShouldBeFound("threshold.equals=" + DEFAULT_THRESHOLD);
+
+        // Get all the sensorList where threshold equals to UPDATED_THRESHOLD
+        defaultSensorShouldNotBeFound("threshold.equals=" + UPDATED_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByThresholdIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where threshold not equals to DEFAULT_THRESHOLD
+        defaultSensorShouldNotBeFound("threshold.notEquals=" + DEFAULT_THRESHOLD);
+
+        // Get all the sensorList where threshold not equals to UPDATED_THRESHOLD
+        defaultSensorShouldBeFound("threshold.notEquals=" + UPDATED_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByThresholdIsInShouldWork() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where threshold in DEFAULT_THRESHOLD or UPDATED_THRESHOLD
+        defaultSensorShouldBeFound("threshold.in=" + DEFAULT_THRESHOLD + "," + UPDATED_THRESHOLD);
+
+        // Get all the sensorList where threshold equals to UPDATED_THRESHOLD
+        defaultSensorShouldNotBeFound("threshold.in=" + UPDATED_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByThresholdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where threshold is not null
+        defaultSensorShouldBeFound("threshold.specified=true");
+
+        // Get all the sensorList where threshold is null
+        defaultSensorShouldNotBeFound("threshold.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByThresholdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where threshold is greater than or equal to DEFAULT_THRESHOLD
+        defaultSensorShouldBeFound("threshold.greaterThanOrEqual=" + DEFAULT_THRESHOLD);
+
+        // Get all the sensorList where threshold is greater than or equal to UPDATED_THRESHOLD
+        defaultSensorShouldNotBeFound("threshold.greaterThanOrEqual=" + UPDATED_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByThresholdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where threshold is less than or equal to DEFAULT_THRESHOLD
+        defaultSensorShouldBeFound("threshold.lessThanOrEqual=" + DEFAULT_THRESHOLD);
+
+        // Get all the sensorList where threshold is less than or equal to SMALLER_THRESHOLD
+        defaultSensorShouldNotBeFound("threshold.lessThanOrEqual=" + SMALLER_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByThresholdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where threshold is less than DEFAULT_THRESHOLD
+        defaultSensorShouldNotBeFound("threshold.lessThan=" + DEFAULT_THRESHOLD);
+
+        // Get all the sensorList where threshold is less than UPDATED_THRESHOLD
+        defaultSensorShouldBeFound("threshold.lessThan=" + UPDATED_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByThresholdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where threshold is greater than DEFAULT_THRESHOLD
+        defaultSensorShouldNotBeFound("threshold.greaterThan=" + DEFAULT_THRESHOLD);
+
+        // Get all the sensorList where threshold is greater than SMALLER_THRESHOLD
+        defaultSensorShouldBeFound("threshold.greaterThan=" + SMALLER_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByMinThresholdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where minThreshold equals to DEFAULT_MIN_THRESHOLD
+        defaultSensorShouldBeFound("minThreshold.equals=" + DEFAULT_MIN_THRESHOLD);
+
+        // Get all the sensorList where minThreshold equals to UPDATED_MIN_THRESHOLD
+        defaultSensorShouldNotBeFound("minThreshold.equals=" + UPDATED_MIN_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByMinThresholdIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where minThreshold not equals to DEFAULT_MIN_THRESHOLD
+        defaultSensorShouldNotBeFound("minThreshold.notEquals=" + DEFAULT_MIN_THRESHOLD);
+
+        // Get all the sensorList where minThreshold not equals to UPDATED_MIN_THRESHOLD
+        defaultSensorShouldBeFound("minThreshold.notEquals=" + UPDATED_MIN_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByMinThresholdIsInShouldWork() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where minThreshold in DEFAULT_MIN_THRESHOLD or UPDATED_MIN_THRESHOLD
+        defaultSensorShouldBeFound("minThreshold.in=" + DEFAULT_MIN_THRESHOLD + "," + UPDATED_MIN_THRESHOLD);
+
+        // Get all the sensorList where minThreshold equals to UPDATED_MIN_THRESHOLD
+        defaultSensorShouldNotBeFound("minThreshold.in=" + UPDATED_MIN_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByMinThresholdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where minThreshold is not null
+        defaultSensorShouldBeFound("minThreshold.specified=true");
+
+        // Get all the sensorList where minThreshold is null
+        defaultSensorShouldNotBeFound("minThreshold.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByMinThresholdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where minThreshold is greater than or equal to DEFAULT_MIN_THRESHOLD
+        defaultSensorShouldBeFound("minThreshold.greaterThanOrEqual=" + DEFAULT_MIN_THRESHOLD);
+
+        // Get all the sensorList where minThreshold is greater than or equal to UPDATED_MIN_THRESHOLD
+        defaultSensorShouldNotBeFound("minThreshold.greaterThanOrEqual=" + UPDATED_MIN_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByMinThresholdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where minThreshold is less than or equal to DEFAULT_MIN_THRESHOLD
+        defaultSensorShouldBeFound("minThreshold.lessThanOrEqual=" + DEFAULT_MIN_THRESHOLD);
+
+        // Get all the sensorList where minThreshold is less than or equal to SMALLER_MIN_THRESHOLD
+        defaultSensorShouldNotBeFound("minThreshold.lessThanOrEqual=" + SMALLER_MIN_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByMinThresholdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where minThreshold is less than DEFAULT_MIN_THRESHOLD
+        defaultSensorShouldNotBeFound("minThreshold.lessThan=" + DEFAULT_MIN_THRESHOLD);
+
+        // Get all the sensorList where minThreshold is less than UPDATED_MIN_THRESHOLD
+        defaultSensorShouldBeFound("minThreshold.lessThan=" + UPDATED_MIN_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
+    void getAllSensorsByMinThresholdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        sensorRepository.saveAndFlush(sensor);
+
+        // Get all the sensorList where minThreshold is greater than DEFAULT_MIN_THRESHOLD
+        defaultSensorShouldNotBeFound("minThreshold.greaterThan=" + DEFAULT_MIN_THRESHOLD);
+
+        // Get all the sensorList where minThreshold is greater than SMALLER_MIN_THRESHOLD
+        defaultSensorShouldBeFound("minThreshold.greaterThan=" + SMALLER_MIN_THRESHOLD);
+    }
+
+    @Test
+    @Transactional
     void getAllSensorsByFieldIsEqualToSomething() throws Exception {
         // Initialize the database
         sensorRepository.saveAndFlush(sensor);
@@ -669,7 +895,9 @@ class SensorResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].position_x").value(hasItem(DEFAULT_POSITION_X)))
-            .andExpect(jsonPath("$.[*].position_y").value(hasItem(DEFAULT_POSITION_Y)));
+            .andExpect(jsonPath("$.[*].position_y").value(hasItem(DEFAULT_POSITION_Y)))
+            .andExpect(jsonPath("$.[*].threshold").value(hasItem(DEFAULT_THRESHOLD.doubleValue())))
+            .andExpect(jsonPath("$.[*].minThreshold").value(hasItem(DEFAULT_MIN_THRESHOLD.doubleValue())));
 
         // Check, that the count call also returns 1
         restSensorMockMvc
@@ -717,7 +945,13 @@ class SensorResourceIT {
         Sensor updatedSensor = sensorRepository.findById(sensor.getId()).get();
         // Disconnect from session so that the updates on updatedSensor are not directly saved in db
         em.detach(updatedSensor);
-        updatedSensor.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).position_x(UPDATED_POSITION_X).position_y(UPDATED_POSITION_Y);
+        updatedSensor
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .position_x(UPDATED_POSITION_X)
+            .position_y(UPDATED_POSITION_Y)
+            .threshold(UPDATED_THRESHOLD)
+            .minThreshold(UPDATED_MIN_THRESHOLD);
 
         restSensorMockMvc
             .perform(
@@ -736,6 +970,8 @@ class SensorResourceIT {
         assertThat(testSensor.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSensor.getPosition_x()).isEqualTo(UPDATED_POSITION_X);
         assertThat(testSensor.getPosition_y()).isEqualTo(UPDATED_POSITION_Y);
+        assertThat(testSensor.getThreshold()).isEqualTo(UPDATED_THRESHOLD);
+        assertThat(testSensor.getMinThreshold()).isEqualTo(UPDATED_MIN_THRESHOLD);
     }
 
     @Test
@@ -810,7 +1046,7 @@ class SensorResourceIT {
         Sensor partialUpdatedSensor = new Sensor();
         partialUpdatedSensor.setId(sensor.getId());
 
-        partialUpdatedSensor.description(UPDATED_DESCRIPTION).position_x(UPDATED_POSITION_X);
+        partialUpdatedSensor.description(UPDATED_DESCRIPTION).position_x(UPDATED_POSITION_X).minThreshold(UPDATED_MIN_THRESHOLD);
 
         restSensorMockMvc
             .perform(
@@ -829,6 +1065,8 @@ class SensorResourceIT {
         assertThat(testSensor.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSensor.getPosition_x()).isEqualTo(UPDATED_POSITION_X);
         assertThat(testSensor.getPosition_y()).isEqualTo(DEFAULT_POSITION_Y);
+        assertThat(testSensor.getThreshold()).isEqualTo(DEFAULT_THRESHOLD);
+        assertThat(testSensor.getMinThreshold()).isEqualTo(UPDATED_MIN_THRESHOLD);
     }
 
     @Test
@@ -847,7 +1085,9 @@ class SensorResourceIT {
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
             .position_x(UPDATED_POSITION_X)
-            .position_y(UPDATED_POSITION_Y);
+            .position_y(UPDATED_POSITION_Y)
+            .threshold(UPDATED_THRESHOLD)
+            .minThreshold(UPDATED_MIN_THRESHOLD);
 
         restSensorMockMvc
             .perform(
@@ -866,6 +1106,8 @@ class SensorResourceIT {
         assertThat(testSensor.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSensor.getPosition_x()).isEqualTo(UPDATED_POSITION_X);
         assertThat(testSensor.getPosition_y()).isEqualTo(UPDATED_POSITION_Y);
+        assertThat(testSensor.getThreshold()).isEqualTo(UPDATED_THRESHOLD);
+        assertThat(testSensor.getMinThreshold()).isEqualTo(UPDATED_MIN_THRESHOLD);
     }
 
     @Test

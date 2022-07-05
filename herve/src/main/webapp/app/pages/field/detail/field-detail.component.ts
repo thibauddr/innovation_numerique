@@ -26,7 +26,6 @@ export class FieldDetailComponent implements OnInit {
   HumidityData: any[] = [];
   RaimData: any[] = [];
 
-
   $temperatureColor = '#F27A5E';
   $luminosityColor = '#F2E34D';
   $humidityColor = '#52BF04';

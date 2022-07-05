@@ -56,6 +56,12 @@ public class SensorServiceImpl implements SensorService {
                 if (sensor.getPosition_y() != null) {
                     existingSensor.setPosition_y(sensor.getPosition_y());
                 }
+                if (sensor.getThreshold() != null) {
+                    existingSensor.setThreshold(sensor.getThreshold());
+                }
+                if (sensor.getMinThreshold() != null) {
+                    existingSensor.setMinThreshold(sensor.getMinThreshold());
+                }
 
                 return existingSensor;
             })

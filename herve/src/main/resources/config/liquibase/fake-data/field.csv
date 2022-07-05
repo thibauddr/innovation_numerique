@@ -1,11 +1,11 @@
-id;name;description;position
-1;Champ Angouleme;Champ de ble;Premier champ en partant de la colline
-2;Champ Angouleme;Champ de ble;Deuxieme champ en partant de la colline
-3;Champ Angouleme;Champ de tournesol;Premier champ bord de riviere
-4;Champ Angouleme;Champ de tournesol;Deuxieme champ bord de riviere
-5;Champ Bordeaux;Champ de vigne;Champ cote route
-6;Champ Bordeaux;Champ de vigne;Champ au milieu
-7;Champ Bordeaux;Champ de vigne;Champ derriere
-8;Champ Barbezieux;Champ de vigne;Champ en haut du plateau
-9;Champ Barbezieux;Champ de vigne;Champ en bas du plateau
-10;Champ Barbezieux;Champ de vigne;Champ derriere le village
+id;name;description;position;user_id
+1;Champ Angouleme;Champ de ble;Premier champ en partant de la colline;1
+2;Champ Angouleme;Champ de ble;Deuxieme champ en partant de la colline;2
+3;Champ Angouleme;Champ de tournesol;Premier champ bord de riviere;1
+4;Champ Angouleme;Champ de tournesol;Deuxieme champ bord de riviere;2
+5;Champ Bordeaux;Champ de vigne;Champ cote route;1
+6;Champ Bordeaux;Champ de vigne;Champ au milieu;2
+7;Champ Bordeaux;Champ de vigne;Champ derriere;1
+8;Champ Barbezieux;Champ de vigne;Champ en haut du plateau;2
+9;Champ Barbezieux;Champ de vigne;Champ en bas du plateau;1
+10;Champ Barbezieux;Champ de vigne;Champ derriere le village;1

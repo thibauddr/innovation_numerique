@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface FieldRepository extends JpaRepository<Field, Long>, JpaSpecificationExecutor<Field> {
-    @Query("select field from Field field where field.user.login = ?#{principal.username}")
+    @Query("select distinct field from Field field left join fetch field.sensors where field.user.login = ?#{principal.username}")
     List<Field> findByUserIsCurrentUser();
 
     default Optional<Field> findOneWithEagerRelationships(Long id) {

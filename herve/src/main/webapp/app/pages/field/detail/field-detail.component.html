@@ -38,10 +38,10 @@
         <p-table [value]="sensors" [scrollable]="true" scrollHeight="400px" [resizableColumns]="true">
           <ng-template pTemplate="header">
             <tr>
-              <th pResizableColumn pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>Name</th>
-              <th pResizableColumn>Description</th>
-              <th pResizableColumn pSortableColumn="sensorType.code"><p-sortIcon field="code"></p-sortIcon>Type</th>
-              <th pResizableColumn></th>
+              <th pResizableColumn pSortableColumn="name" scope="col"><p-sortIcon field="name"></p-sortIcon>Name</th>
+              <th pResizableColumn scope="col">Description</th>
+              <th pResizableColumn pSortableColumn="sensorType.code" scope="col"><p-sortIcon field="code"></p-sortIcon>Type</th>
+              <th pResizableColumn scope="col"></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-sensor>

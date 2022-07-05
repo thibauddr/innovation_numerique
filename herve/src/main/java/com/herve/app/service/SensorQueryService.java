@@ -107,6 +107,12 @@ public class SensorQueryService extends QueryService<Sensor> {
             if (criteria.getPosition_y() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPosition_y(), Sensor_.position_y));
             }
+            if (criteria.getThreshold() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getThreshold(), Sensor_.threshold));
+            }
+            if (criteria.getMinThreshold() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getMinThreshold(), Sensor_.minThreshold));
+            }
             if (criteria.getFieldId() != null) {
                 specification =
                     specification.and(

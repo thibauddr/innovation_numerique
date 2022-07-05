@@ -36,6 +36,12 @@ public class Sensor implements Serializable {
     @Column(name = "position_y")
     private Integer position_y;
 
+    @Column(name = "threshold")
+    private Float threshold;
+
+    @Column(name = "min_threshold")
+    private Float minThreshold;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "user", "sensors" }, allowSetters = true)
     private Field field;
@@ -114,6 +120,32 @@ public class Sensor implements Serializable {
 
     public void setPosition_y(Integer position_y) {
         this.position_y = position_y;
+    }
+
+    public Float getThreshold() {
+        return this.threshold;
+    }
+
+    public Sensor threshold(Float threshold) {
+        this.setThreshold(threshold);
+        return this;
+    }
+
+    public void setThreshold(Float threshold) {
+        this.threshold = threshold;
+    }
+
+    public Float getMinThreshold() {
+        return this.minThreshold;
+    }
+
+    public Sensor minThreshold(Float minThreshold) {
+        this.setMinThreshold(minThreshold);
+        return this;
+    }
+
+    public void setMinThreshold(Float minThreshold) {
+        this.minThreshold = minThreshold;
     }
 
     public Field getField() {
@@ -201,6 +233,8 @@ public class Sensor implements Serializable {
             ", description='" + getDescription() + "'" +
             ", position_x=" + getPosition_x() +
             ", position_y=" + getPosition_y() +
+            ", threshold=" + getThreshold() +
+            ", minThreshold=" + getMinThreshold() +
             "}";
     }
 }
