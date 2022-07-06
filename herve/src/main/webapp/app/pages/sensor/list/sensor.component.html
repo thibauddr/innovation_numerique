@@ -1,24 +1,21 @@
 <div>
   <h2 id="page-heading" data-cy="SensorHeading">
     <span jhiTranslate="herveApp.sensor.home.title">Sensors</span>
-
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="herveApp.sensor.home.refreshListLabel">Refresh List</span>
-      </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-sensor"
-        [routerLink]="['/sensor/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="herveApp.sensor.home.createLabel"> Create a new Sensor </span>
-      </button>
-    </div>
   </h2>
+
+  <div class="d-flex justify-content-end">
+    <button
+      pButton
+      (click)="loadAll()"
+      [disabled]="isLoading"
+      icon="fa-solid fa-rotate"
+      type="button"
+      iconPos="left"
+      label="Actualiser"
+    ></button>
+
+    <button pButton [routerLink]="['/sensor/new']" icon="fa-solid fa-plus" type="button" iconPos="left" label="Créer"></button>
+  </div>
 
   <jhi-alert-error></jhi-alert-error>
 
@@ -28,59 +25,105 @@
     <span jhiTranslate="herveApp.sensor.home.notFound">No sensors found</span>
   </div>
 
-  <div class="table-responsive" id="entities" *ngIf="sensors && sensors.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
+  <div class="card" *ngIf="sensors && sensors.length > 0">
+    <p-table
+      [value]="sensors"
+      sortField="field.name"
+      groupRowsBy="field.name"
+      sortMode="single"
+      [scrollable]="true"
+      scrollHeight="500px"
+      rowGroupMode="subheader"
+      responsiveLayout="scroll"
+    >
+      <ng-template pTemplate="header">
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="herveApp.sensor.name">Name</span></th>
-          <th scope="col"><span jhiTranslate="herveApp.sensor.description">Description</span></th>
-          <th scope="col"><span jhiTranslate="herveApp.sensor.position_x">Position X</span></th>
-          <th scope="col"><span jhiTranslate="herveApp.sensor.position_y">Position Y</span></th>
-          <th scope="col"><span jhiTranslate="herveApp.sensor.field">Field</span></th>
-          <th scope="col"><span jhiTranslate="herveApp.sensor.sensorType">Sensor Type</span></th>
+          <th scope="col" pSortableColumn="name"><p-sortIcon field="name"></p-sortIcon>Name</th>
+          <th scope="col">Description</th>
+          <th scope="col" pSortableColumn="sensorType.code"><p-sortIcon field="code"></p-sortIcon>Type</th>
+          <th scope="col">Position X</th>
+          <th scope="col">Position Y</th>
+          <th scope="col">Threshold min</th>
+          <th scope="col">Threshold max</th>
           <th scope="col"></th>
         </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let sensor of sensors; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/sensor', sensor.id, 'view']">{{ sensor.id }}</a>
+      </ng-template>
+
+      <ng-template pTemplate="groupheader" let-sensor>
+        <tr pRowGroupHeader>
+          <td colspan="8">
+            <p>
+              <i class="fa-solid fa-tractor"></i> 
+              <span class="font-bold ml-2">{{ sensor.field.name }}</span>
+              -
+              <span class="font-bold ml-2">{{ sensor.field.description }}</span>
+            </p>
           </td>
-          <td>{{ sensor.name }}</td>
-          <td>{{ sensor.description }}</td>
-          <td>{{ sensor.position_x }}</td>
-          <td>{{ sensor.position_y }}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-sensor let-rowIndex="rowIndex">
+        <tr>
           <td>
-            <div *ngIf="sensor.field">
-              <a [routerLink]="['/field', sensor.field?.id, 'view']">{{ sensor.field?.id }}</a>
-            </div>
+            {{ sensor.name }}
           </td>
           <td>
-            <div *ngIf="sensor.sensorType">
-              <a [routerLink]="['/sensor-type', sensor.sensorType?.id, 'view']">{{ sensor.sensorType?.id }}</a>
-            </div>
+            {{ sensor.description }}
           </td>
-          <td class="text-end">
+          <td>
+            <p-chip
+              label="{{ sensor.sensorType.name }}"
+              [icon]="
+                sensor.sensorType.code == 'TEM'
+                  ? 'fa-solid fa-temperature-high'
+                  : sensor.sensorType.code == 'LUM'
+                  ? 'fa-solid fa-lightbulb'
+                  : sensor.sensorType.code == 'HUM'
+                  ? 'fa-solid fa-droplet'
+                  : sensor.sensorType.code == 'RAI'
+                  ? 'fa-solid fa-cloud-showers-heavy'
+                  : ''
+              "
+              styleClass="{{ sensor.sensorType.code }}"
+            ></p-chip>
+          </td>
+          <td>
+            {{ sensor.position_x }}
+          </td>
+          <td>
+            {{ sensor.position_y }}
+          </td>
+          <td>
+            {{ sensor.minThreshold }}
+          </td>
+          <td>
+            {{ sensor.threshold }}
+          </td>
+          <td>
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/sensor', sensor.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+              <button
+                pButton
+                pRipple
+                [routerLink]="['/sensor', sensor.id, 'view']"
+                icon="fa-solid fa-eye"
+                type="button"
+                class="p-button-rounded"
+              ></button>
 
-              <button type="submit" [routerLink]="['/sensor', sensor.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+              <button
+                pButton
+                pRipple
+                [routerLink]="['/sensor', sensor.id, 'edit']"
+                icon="fa-solid fa-pencil"
+                type="button"
+                class="p-button-rounded"
+              ></button>
 
-              <button type="submit" (click)="delete(sensor)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
+              <button pButton pRipple (click)="delete(sensor)" icon="fa-solid fa-trash-can" type="button" class="p-button-rounded"></button>
             </div>
           </td>
         </tr>
-      </tbody>
-    </table>
+      </ng-template>
+    </p-table>
   </div>
 </div>

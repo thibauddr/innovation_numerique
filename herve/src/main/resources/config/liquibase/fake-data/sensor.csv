@@ -2,12 +2,20 @@ id;name;description;position_x;position_y;sensor_type_id;threshold;min_threshold
 1;Capteur de temperature;Situe au NE;1000;1000;1;30;5;2
 7;Capteur de temperature;Situe au SE;1000;0;1;30;5;2
 11;Capteur de temperature;Situe au milieu du champ;500;500;1;30;5;2
-2;Capteur de  luminosite;Situe au NO;0;1000;2;800;200;2
-6;Capteur de  luminosite;Situe au SO;0;0;2;800;200;2
-8;Capteur de  luminosite;Situe au milieu du champ;500;500;2;800;200;2
-3;Capteur de  d'humidite des sols;Situe au NO;0;1000;3;70;30;2
-5;Capteur de  d'humidite des sols;Situe au SO;0;0;3;70;30;2
-9;Capteur de  d'humidite des sols;Situe au milieu du champ;500;500;3;70;30;2
-4;Capteur de  pluie;Situe au NE;1000;1000;4;800;0;2
-10;Capteur de  pluie;Situe au SE;1000;0;4;800;0;2
-12;Capteur de  pluie;Situe au milieu du champ;500;500;4;800;0;2
+2;Capteur de luminosite;Situe au NO;0;1000;2;800;200;2
+6;Capteur de luminosite;Situe au SO;0;0;2;800;200;2
+8;Capteur de luminosite;Situe au milieu du champ;500;500;2;800;200;2
+3;Capteur d'humidite des sols;Situe au NO;0;1000;3;70;30;2
+5;Capteur d'humidite des sols;Situe au SO;0;0;3;70;30;2
+9;Capteur d'humidite des sols;Situe au milieu du champ;500;500;3;70;30;2
+4;Capteur de pluie;Situe au NE;1000;1000;4;800;0;2
+10;Capteur de pluie;Situe au SE;1000;0;4;800;0;2
+12;Capteur de pluie;Situe au milieu du champ;500;500;4;800;0;2
+13;Capteur de temperature de l'admin;La bas;100;100;1;30;5;1
+14;Capteur de luminosite de l'admin;La bas;100;100;2;800;200;1
+15;Capteur d'humidité de l'admin;la bas;100;100;3;70;30;1
+16;Capteur de pluie de l'admin;la bas;100;100;4;800;0;1
+17;Capteur de temperature de l'autre;ailleurs;200;200;1;30;5;4
+18;Capteur de luminosite de l'autre;ailleurs;200;200;2;800;200;4
+19;Capteur d'humidite de l'autre;ailleurs;200;200;3;70;30;4
+20;Capteur de pluie de l'autre;ailleurs;200;200;4;800;200;4
