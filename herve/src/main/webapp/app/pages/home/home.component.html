@@ -3,18 +3,18 @@
     <!-- #region User is connected -->
     <div *ngSwitchCase="true">
       <!-- #region Carousel -->
-      <p-carousel [value]="fields" styleClass="custom-carousel" [numVisible]="3" [numScroll]="3" [circular]="false">
+      <p-carousel [value]="fields" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2" [circular]="false">
         <ng-template let-field pTemplate="item">
           <div class="field-item">
             <div class="field-item-content">
               <div class="row">
                 <div class="col-md-2">
-                  <p><i class="fa-solid fa-temperature-high"></i> {{ temperatureValue }}°</p>
-                  <p><i class="fa-solid fa-lightbulb"></i> {{ luminosityValue }} lux</p>
+                  <p><i class="fa-solid fa-temperature-high"></i> {{ getValuesToday(field, '°C') }}°</p>
+                  <p><i class="fa-solid fa-lightbulb"></i> {{ getValuesToday(field, 'lux') }} lux</p>
                 </div>
                 <div class="col-md-2">
-                  <p><i class="fa-solid fa-droplet"></i> {{ humidityValue }} %</p>
-                  <p><i class="fa-solid fa-cloud-showers-heavy"></i> {{ raimValue }} mm</p>
+                  <p><i class="fa-solid fa-droplet"></i> {{ getValuesToday(field, '%') }} %</p>
+                  <p><i class="fa-solid fa-cloud-showers-heavy"></i> {{ getValuesToday(field, 'mm') }} mm</p>
                 </div>
                 <div class="col-md-6">
                   <h4 class="p-mb-1">{{ field.name }}</h4>
@@ -51,8 +51,8 @@
             <ng-template pTemplate="body" let-data>
               <tr>
                 <td>{{ data.sensor.name }}</td>
-                <td>{{ data.sensor.minThreshold }}  {{ data.unit }}</td>
-                <td>{{ data.sensor.threshold }}  {{ data.unit }}</td>
+                <td>{{ data.sensor.minThreshold }} {{ data.unit }}</td>
+                <td>{{ data.sensor.threshold }} {{ data.unit }}</td>
                 <td>{{ data.value }} {{ data.unit }}</td>
               </tr>
             </ng-template>
@@ -62,7 +62,9 @@
           <h4 jhiTranslate="global.menu.today">Today</h4>
           <p-messages severity="error" *ngFor="let data of alertToday">
             <ng-template pTemplate>
-              <div class="ml-2">{{ data.sensor.name + ' - ' + data.sensor.field + ' - ' + data.value + ' ' + data.unit }}</div>
+              <div class="ml-2">
+                {{ data.sensor.name + ' - ' + getFieldBySensorId(data.sensor.id).name + ' = ' + data.value + ' ' + data.unit }}
+              </div>
             </ng-template>
           </p-messages>
         </div>

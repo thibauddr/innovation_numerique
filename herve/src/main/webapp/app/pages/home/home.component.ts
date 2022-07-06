@@ -5,13 +5,14 @@ import { map, takeUntil } from 'rxjs/operators';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { FieldService } from 'app/entities/field/service/field.service';
-import { IField } from 'app/entities/field/field.model';
+import { Field, IField } from 'app/entities/field/field.model';
 import { HttpResponse } from '@angular/common/http';
 import { TEMPERATURE_SCALE } from 'app/entities/sensor/data/temperatureScale';
 import { HUMIDITY_SCALE } from 'app/entities/sensor/data/humidityScale';
 import { Message } from 'primeng/api';
 import { SensorDataService } from 'app/entities/sensor-data/service/sensor-data.service';
 import { ISensorData, SensorData } from 'app/entities/sensor-data/sensor-data.model';
+import { ISensor, Sensor } from 'app/entities/sensor/sensor.model';
 
 @Component({
   selector: 'jhi-home',
@@ -68,6 +69,42 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigate(['/field/' + id + '/view']);
   }
 
+  getValuesToday(field: IField, unit: string): number | null {
+    const sensors = field.sensors ?? new Array<ISensor>();
+    if (this.sensorDataToday) {
+      for (const sensorData of this.sensorDataToday) {
+        for (const sensor of sensors) {
+          if (sensor.id === sensorData.sensor?.id) {
+            const value = sensorData.value ? sensorData.value : -1;
+            if (sensorData.unit === unit) {
+              return value;
+            } else {
+              continue;
+            }
+          } else {
+            continue;
+          }
+        }
+        continue;
+      }
+    }
+    return null;
+  }
+
+  getFieldBySensorId(sensorId: number): IField {
+    for (const field of this.fields) {
+      const sensors = field.sensors ?? new Array<Sensor>();
+      for (const sensor of sensors) {
+        if (sensor.id === sensorId) {
+          return field;
+        } else {
+          continue;
+        }
+      }
+    }
+    return new Field();
+  }
+
   private setData(): void {
     this.fieldService
       .getWithCurrentUser()
@@ -94,21 +131,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
             if (value < minThreshold || value > maxThreshold) {
               this.alertToday.push(alert);
-            }
-
-            switch (alert.unit) {
-              case '°C':
-                this.temperatureValue = value;
-                break;
-              case 'lux':
-                this.luminosityValue = value;
-                break;
-              case '%':
-                this.humidityValue = value;
-                break;
-              case 'mm':
-                this.raimValue = value;
-                break;
             }
           });
         })
