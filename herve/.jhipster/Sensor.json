@@ -17,6 +17,14 @@
     {
       "fieldName": "position_y",
       "fieldType": "Integer"
+    },
+    {
+      "fieldName": "threshold",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "minThreshold",
+      "fieldType": "Float"
     }
   ],
   "jpaMetamodelFiltering": true,

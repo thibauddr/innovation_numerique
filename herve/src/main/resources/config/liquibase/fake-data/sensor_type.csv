@@ -1,5 +1,5 @@
 id;code;name;description
-1;1;Temperature;Capteur permettant de relever la temperature et l'humidite dans l'air
-2;2;Luminosite;Capteur permettant de relever la luminosite
-3;3;Humidite des sols;Capteur permettant de relever l'humidite des sols
-4;4;Pluie / Soleil;Capteur permettant de relever si il pleut ou non
+1;TEM;Temperature;Capteur permettant de relever la temperature et l'humidite dans l'air
+2;LUM;Luminosite;Capteur permettant de relever la luminosite
+3;HUM;Humidite des sols;Capteur permettant de relever l'humidite des sols
+4;RAI;Pluie;Capteur permettant de relever si il pleut ou non

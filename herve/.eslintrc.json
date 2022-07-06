@@ -20,6 +20,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "@typescript-eslint/restrict-plus-operands": "off",
     "@angular-eslint/component-selector": [
       "error",
       {
@@ -73,7 +74,7 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-parameter-properties": ["warn", { "allows": ["public", "private", "protected"] }],
     "@typescript-eslint/no-shadow": ["error"],
-    "@typescript-eslint/no-unnecessary-condition": "error",
+    "@typescript-eslint/no-unnecessary-condition": "warn",
     "@typescript-eslint/no-unsafe-argument": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-unsafe-call": "off",
@@ -87,7 +88,7 @@
     "guard-for-in": "error",
     "no-bitwise": "error",
     "no-caller": "error",
-    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-console": "off",
     "no-eval": "error",
     "no-labels": "error",
     "no-new": "error",

@@ -32,6 +32,10 @@ export class SensorService {
     return this.http.get<ISensor>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  getWithFieldId(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ISensor[]>(`${this.resourceUrl}/getWithFieldId/${id}`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<ISensor[]>(this.resourceUrl, { params: options, observe: 'response' });

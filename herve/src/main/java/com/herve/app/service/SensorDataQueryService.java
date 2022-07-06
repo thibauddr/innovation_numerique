@@ -4,6 +4,9 @@ import com.herve.app.domain.*; // for static metamodels
 import com.herve.app.domain.SensorData;
 import com.herve.app.repository.SensorDataRepository;
 import com.herve.app.service.criteria.SensorDataCriteria;
+
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.JoinType;
 import org.slf4j.Logger;
@@ -56,6 +59,39 @@ public class SensorDataQueryService extends QueryService<SensorData> {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<SensorData> specification = createSpecification(criteria);
         return sensorDataRepository.findAll(specification, page);
+    }
+
+    /**
+     * Return a {@link List} of {@link SensorData} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public List<SensorData> findNow(SensorDataCriteria criteria) {
+        log.debug("find by criteria : {}", criteria);
+        return sensorDataRepository.findByDatetimeEquals(LocalDate.now());
+    }
+
+    /**
+     * Return a {@link List} of {@link SensorData} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public List<SensorData> findCurrentUserAlert(SensorDataCriteria criteria) {
+        log.debug("find by criteria : {}", criteria);
+        return sensorDataRepository.findCurrentUserAlert(LocalDate.now());
+    }
+
+    /**
+     * Return a {@link List} of {@link SensorData} which matches the criteria from the database.
+     * @param date The object which holds all the filters, which the entities should match.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public List<SensorData> findCurrentUserWithDay(LocalDate date) {
+        log.debug("find by date : {}", date);
+        return sensorDataRepository.findCurrentUserAlert(date);
     }
 
     /**

@@ -59,6 +59,16 @@ public class FieldQueryService extends QueryService<Field> {
     }
 
     /**
+     * Return a {@link List} of {@link Field} which matches the criteria from the database.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public List<Field> findFieldOfConnectedUser() {
+        log.debug("find by user connected : {}");
+        return fieldRepository.findByUserIsCurrentUser();
+    }
+
+    /**
      * Return the number of matching entities in the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the number of matching entities.

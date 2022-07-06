@@ -46,6 +46,24 @@ export class SensorDataService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findNow(): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<ISensorData[]>(`${this.resourceUrl}/now`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  getSensorDataCurrentUserAlert(): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<ISensorData[]>(`${this.resourceUrl}/getSensorDataCurrentUserAlert`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  getSensorDataCurrentUserAlertWithDate(date: Date): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<ISensorData[]>(`${this.resourceUrl}/getSensorDataCurrentUserByDay/${date.toISOString().substring(0, 10)}`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http

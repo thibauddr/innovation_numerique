@@ -11,6 +11,8 @@ export interface ISensor {
   field?: IField | null;
   sensorType?: ISensorType;
   sensorData?: ISensorData[] | null;
+  threshold?: number | null;
+  minThreshold?: number | null;
 }
 
 export class Sensor implements ISensor {
@@ -22,7 +24,9 @@ export class Sensor implements ISensor {
     public position_y?: number | null,
     public field?: IField | null,
     public sensorType?: ISensorType,
-    public sensorData?: ISensorData[] | null
+    public sensorData?: ISensorData[] | null,
+    public threshold?: number | null,
+    public minThreshold?: number | null,
   ) {}
 }
 

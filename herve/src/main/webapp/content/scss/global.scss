@@ -52,6 +52,12 @@ a:hover {
   color: $dropdown-link-hover-color;
 }
 
+.p-button {
+  background-color: $lightGreen !important;
+  border: $lightGreen !important;
+  color: #fff !important;
+}
+
 /* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */

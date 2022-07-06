@@ -37,6 +37,11 @@ export class FieldService {
     return this.http.get<IField[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  getWithCurrentUser(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IField[]>(`${this.resourceUrl}/getWithCurrentUser`, { params: options, observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

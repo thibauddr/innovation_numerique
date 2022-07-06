@@ -2,27 +2,27 @@
   "herveApp": {
     "field": {
       "home": {
-        "title": "Fields",
+        "title": "Champs",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Field",
-        "createOrEditLabel": "Créer ou éditer un Field",
-        "notFound": "Aucun Field trouvé"
+        "createLabel": "Créer un nouveau champ",
+        "createOrEditLabel": "Créer ou éditer un champ",
+        "notFound": "Aucun champ trouvé"
       },
-      "created": "Un nouveau Field a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Field avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Field avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau champ a été créé avec l'identifiant {{ param }}",
+      "updated": "Le champ avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le champ avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Field {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le champ {{ id }} ?"
       },
       "detail": {
-        "title": "Field"
+        "title": "Champ"
       },
       "id": "ID",
-      "name": "Name",
+      "name": "Nom",
       "description": "Description",
       "position": "Position",
-      "user": "User",
-      "sensor": "Sensor"
+      "user": "Utilisateur",
+      "sensor": "Capteur"
     }
   }
 }

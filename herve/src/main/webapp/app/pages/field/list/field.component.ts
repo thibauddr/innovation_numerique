@@ -19,7 +19,7 @@ export class FieldComponent implements OnInit {
   loadAll(): void {
     this.isLoading = true;
 
-    this.fieldService.query().subscribe({
+    this.fieldService.getWithCurrentUser().subscribe({
       next: (res: HttpResponse<IField[]>) => {
         this.isLoading = false;
         this.fields = res.body ?? [];

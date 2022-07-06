@@ -36,6 +36,10 @@ public class SensorCriteria implements Serializable, Criteria {
 
     private IntegerFilter position_y;
 
+    private FloatFilter threshold;
+
+    private FloatFilter minThreshold;
+
     private LongFilter fieldId;
 
     private LongFilter sensorTypeId;
@@ -52,6 +56,8 @@ public class SensorCriteria implements Serializable, Criteria {
         this.description = other.description == null ? null : other.description.copy();
         this.position_x = other.position_x == null ? null : other.position_x.copy();
         this.position_y = other.position_y == null ? null : other.position_y.copy();
+        this.threshold = other.threshold == null ? null : other.threshold.copy();
+        this.minThreshold = other.minThreshold == null ? null : other.minThreshold.copy();
         this.fieldId = other.fieldId == null ? null : other.fieldId.copy();
         this.sensorTypeId = other.sensorTypeId == null ? null : other.sensorTypeId.copy();
         this.sensorDataId = other.sensorDataId == null ? null : other.sensorDataId.copy();
@@ -138,6 +144,36 @@ public class SensorCriteria implements Serializable, Criteria {
         this.position_y = position_y;
     }
 
+    public FloatFilter getThreshold() {
+        return threshold;
+    }
+
+    public FloatFilter threshold() {
+        if (threshold == null) {
+            threshold = new FloatFilter();
+        }
+        return threshold;
+    }
+
+    public void setThreshold(FloatFilter threshold) {
+        this.threshold = threshold;
+    }
+
+    public FloatFilter getMinThreshold() {
+        return minThreshold;
+    }
+
+    public FloatFilter minThreshold() {
+        if (minThreshold == null) {
+            minThreshold = new FloatFilter();
+        }
+        return minThreshold;
+    }
+
+    public void setMinThreshold(FloatFilter minThreshold) {
+        this.minThreshold = minThreshold;
+    }
+
     public LongFilter getFieldId() {
         return fieldId;
     }
@@ -206,6 +242,8 @@ public class SensorCriteria implements Serializable, Criteria {
             Objects.equals(description, that.description) &&
             Objects.equals(position_x, that.position_x) &&
             Objects.equals(position_y, that.position_y) &&
+            Objects.equals(threshold, that.threshold) &&
+            Objects.equals(minThreshold, that.minThreshold) &&
             Objects.equals(fieldId, that.fieldId) &&
             Objects.equals(sensorTypeId, that.sensorTypeId) &&
             Objects.equals(sensorDataId, that.sensorDataId) &&
@@ -215,7 +253,19 @@ public class SensorCriteria implements Serializable, Criteria {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, position_x, position_y, fieldId, sensorTypeId, sensorDataId, distinct);
+        return Objects.hash(
+            id,
+            name,
+            description,
+            position_x,
+            position_y,
+            threshold,
+            minThreshold,
+            fieldId,
+            sensorTypeId,
+            sensorDataId,
+            distinct
+        );
     }
 
     // prettier-ignore
@@ -227,6 +277,8 @@ public class SensorCriteria implements Serializable, Criteria {
             (description != null ? "description=" + description + ", " : "") +
             (position_x != null ? "position_x=" + position_x + ", " : "") +
             (position_y != null ? "position_y=" + position_y + ", " : "") +
+            (threshold != null ? "threshold=" + threshold + ", " : "") +
+            (minThreshold != null ? "minThreshold=" + minThreshold + ", " : "") +
             (fieldId != null ? "fieldId=" + fieldId + ", " : "") +
             (sensorTypeId != null ? "sensorTypeId=" + sensorTypeId + ", " : "") +
             (sensorDataId != null ? "sensorDataId=" + sensorDataId + ", " : "") +

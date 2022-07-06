@@ -46,6 +46,16 @@ public class SensorQueryService extends QueryService<Sensor> {
     }
 
     /**
+     * Return a {@link List} of {@link Sensor} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public List<Sensor> findByFieldId(Long fieldId) {
+        return sensorRepository.findByFieldId(fieldId);
+    }
+
+    /**
      * Return a {@link Page} of {@link Sensor} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
@@ -96,6 +106,12 @@ public class SensorQueryService extends QueryService<Sensor> {
             }
             if (criteria.getPosition_y() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPosition_y(), Sensor_.position_y));
+            }
+            if (criteria.getThreshold() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getThreshold(), Sensor_.threshold));
+            }
+            if (criteria.getMinThreshold() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getMinThreshold(), Sensor_.minThreshold));
             }
             if (criteria.getFieldId() != null) {
                 specification =
