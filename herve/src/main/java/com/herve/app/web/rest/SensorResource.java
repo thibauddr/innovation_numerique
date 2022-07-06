@@ -151,6 +151,19 @@ public class SensorResource {
     }
 
     /**
+     * {@code GET  /sensors/findByUser} : get all the sensors.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of sensors in body.
+     */
+    @GetMapping("/sensors/findByUser")
+    public ResponseEntity<List<Sensor>> findByUserConnected(SensorCriteria criteria) {
+        log.debug("REST request to get Sensors by user id: {}", criteria);
+        List<Sensor> entityList = sensorQueryService.findByUserConnected(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
      * {@code GET  /sensors} : get all the sensors.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of sensors in body.

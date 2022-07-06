@@ -22,6 +22,14 @@
         <dd>
           <span>{{ sensor.description }}</span>
         </dd>
+        <dt><span jhiTranslate="herveApp.sensor.minThreshold">Threshold min</span></dt>
+        <dd>
+          <span>{{ sensor.minThreshold }}</span>
+        </dd>
+        <dt><span jhiTranslate="herveApp.sensor.threshold">Threshold max</span></dt>
+        <dd>
+          <span>{{ sensor.threshold }}</span>
+        </dd>
         <dt><span jhiTranslate="herveApp.sensor.position_x">Position X</span></dt>
         <dd>
           <span>{{ sensor.position_x }}</span>
@@ -33,13 +41,13 @@
         <dt><span jhiTranslate="herveApp.sensor.field">Field</span></dt>
         <dd>
           <div *ngIf="sensor.field">
-            <a [routerLink]="['/field', sensor.field?.id, 'view']">{{ sensor.field?.id }}</a>
+            <a [routerLink]="['/field', sensor.field?.id, 'view']">{{ sensor.field?.name }}</a>
           </div>
         </dd>
         <dt><span jhiTranslate="herveApp.sensor.sensorType">Sensor Type</span></dt>
         <dd>
           <div *ngIf="sensor.sensorType">
-            <a [routerLink]="['/sensor-type', sensor.sensorType?.id, 'view']">{{ sensor.sensorType?.id }}</a>
+            <a [routerLink]="['/sensor-type', sensor.sensorType?.id, 'view']">{{ sensor.sensorType?.name }}</a>
           </div>
         </dd>
       </dl>

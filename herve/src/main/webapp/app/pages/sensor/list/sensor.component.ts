@@ -9,6 +9,7 @@ import { SensorService } from 'app/entities/sensor/service/sensor.service';
 @Component({
   selector: 'jhi-sensor',
   templateUrl: './sensor.component.html',
+  styleUrls: ['./sensor.component.scss'],
 })
 export class SensorComponent implements OnInit {
   sensors?: ISensor[];
@@ -19,7 +20,7 @@ export class SensorComponent implements OnInit {
   loadAll(): void {
     this.isLoading = true;
 
-    this.sensorService.query().subscribe({
+    this.sensorService.findByUser().subscribe({
       next: (res: HttpResponse<ISensor[]>) => {
         this.isLoading = false;
         this.sensors = res.body ?? [];

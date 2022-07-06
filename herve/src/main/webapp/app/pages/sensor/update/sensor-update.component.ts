@@ -30,6 +30,8 @@ export class SensorUpdateComponent implements OnInit {
     position_y: [],
     field: [],
     sensorType: [null, Validators.required],
+    threshold: [null, Validators.required],
+    minThreshold: [null, Validators.required],
   });
 
   constructor(
@@ -98,6 +100,8 @@ export class SensorUpdateComponent implements OnInit {
       position_y: sensor.position_y,
       field: sensor.field,
       sensorType: sensor.sensorType,
+      threshold: sensor.threshold,
+      minThreshold: sensor.minThreshold
     });
 
     this.fieldsSharedCollection = this.fieldService.addFieldToCollectionIfMissing(this.fieldsSharedCollection, sensor.field);
@@ -135,6 +139,8 @@ export class SensorUpdateComponent implements OnInit {
       position_y: this.editForm.get(['position_y'])!.value,
       field: this.editForm.get(['field'])!.value,
       sensorType: this.editForm.get(['sensorType'])!.value,
+      threshold: this.editForm.get(['threshold'])!.value,
+      minThreshold: this.editForm.get(['minThreshold'])!.value,
     };
   }
 }

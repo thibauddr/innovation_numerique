@@ -51,6 +51,17 @@ public class SensorQueryService extends QueryService<Sensor> {
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
+    public List<Sensor> findByUserConnected(SensorCriteria criteria) {
+        log.debug("find by user id : {}", criteria);
+        return sensorRepository.findByUserConnected();
+    }
+
+    /**
+     * Return a {@link List} of {@link Sensor} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
     public List<Sensor> findByFieldId(Long fieldId) {
         return sensorRepository.findByFieldId(fieldId);
     }

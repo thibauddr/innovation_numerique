@@ -1,6 +1,6 @@
 <div class="justify-content-center">
   <div *ngIf="field">
-    <div class="mb-5">
+    <div class="mb-2">
       <button pButton icon="fa-solid fa-circle-arrow-left" type="button" iconPos="left" label="Retour" (click)="previousState()"></button>
 
       <button
@@ -28,7 +28,7 @@
       </dd>
     </dl>
 
-    <div class="row mt-5 mb-5">
+    <div class="row mt-2 mb-2">
       <div class="col-md-5">
         <h3 jhiTranslate="herveApp.sensorType.temperature">Temperature</h3>
         <p-chart type="line" [data]="temperatureData" [options]=""></p-chart>
@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <div class="row mt-5 mb-5">
+    <div class="row mt-2 mb-2">
       <div class="col-md-4">
         <h3 jhiTranslate="herveApp.sensorType.luminosity">Luminosity</h3>
         <p-chart type="line" [data]="luminosityData" [options]=""></p-chart>
