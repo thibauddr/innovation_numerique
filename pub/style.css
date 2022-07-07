@@ -102,9 +102,44 @@ body {
 }
 
 .footer {
-  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 0.8em;
-  padding: 50px;
+  position: absolute;
+  z-index: 99;
+  left:0;
+  bottom:0;
+  background: #7b6855;
+  color: white;
+}
+
+.footer .name {
+  margin: 5px 15px;
+}
+
+.grass {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom: 31px;
+}
+.grass svg {
+  fill: #5d9345;
+  animation: skew 3s infinite;
+  transform: skew;
+  animation-direction: alternate;
+}
+@keyframes skew {
+  0% {
+    transform: skewX(13deg) translate(-7px);
+  }
+  100% {
+    transform: skewX(-13deg) translate(7px);
+  }
 }
 
 /* .nom {
@@ -171,6 +206,15 @@ body {
 .fonctionnalites {
   margin: 0 80px;
   text-align: justify;
+}
+
+.texte_fonctionnalites {
+  display: flex;
+  align-items: center;
+}
+
+.semiText_fonctionnalites {
+  margin-right: 75px;
 }
 
 /* #################### */
