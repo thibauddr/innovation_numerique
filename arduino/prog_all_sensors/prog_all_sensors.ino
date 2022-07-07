@@ -64,5 +64,6 @@ void loop() {
   // read the input on analog pin 0:
     Serial.println("");
 
-  delay(6000);
+// délai de refresh
+  delay(1000);
 }
