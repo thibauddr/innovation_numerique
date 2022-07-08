@@ -271,4 +271,16 @@ body {
   .fonctionnalites h2 {
     text-align: left;
   }
+  .texte_fonctionnalites {
+	flex-direction: column;
+  }
+  .semiText_fonctionnalites {
+	margin-right: 0;
+  }
+  .grass svg {
+	width: 90%;
+  }
+  .p_description {
+	text-align: center;
+  }
 }
